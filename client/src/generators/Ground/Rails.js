@@ -1,6 +1,7 @@
 import * as THREE from 'three';
+import Barrier from './Barrier';
 
-export default function Road(zoom, boardWidth, positionWidth) {
+export default function Rails(zoom, boardWidth, positionWidth) {
   const rails = new THREE.Group();
 
   const createSection = (color) =>
@@ -40,14 +41,16 @@ export default function Road(zoom, boardWidth, positionWidth) {
   leftRail.position.y = -26;
   rails.add(leftRail);
   for (let i = 0; i < 34; i++) {
-      const sleeper = new THREE.Mesh(
-          new THREE.BoxBufferGeometry(5 * zoom, 40 * zoom, 2 * zoom),
-          new THREE.MeshLambertMaterial({ color: '#744441', flatShading: true })
-      );
-      sleeper.position.z = 1 * zoom;
-      sleeper.position.x = -boardWidth * 1.5 + (i * 40) * zoom;
-      rails.add(sleeper);
+    const sleeper = new THREE.Mesh(
+      new THREE.BoxBufferGeometry(5 * zoom, 40 * zoom, 2 * zoom),
+      new THREE.MeshLambertMaterial({ color: '#744441', flatShading: true })
+    );
+    sleeper.position.z = 1 * zoom;
+    sleeper.position.x = -boardWidth * 1.5 + (i * 40) * zoom;
+    rails.add(sleeper);
   }
+
+  rails.add(Barrier(zoom));
 
   return rails;
 }
