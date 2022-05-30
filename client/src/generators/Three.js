@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 export default function Three(zoom, height) {
-    const threeHeights = [20, 45, 60];
+    const threeHeights = [20, 45, 60, 30, 75];
 
     const three = new THREE.Group();
 

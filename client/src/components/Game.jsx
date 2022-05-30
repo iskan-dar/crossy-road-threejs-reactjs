@@ -2,6 +2,8 @@ import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 import Chicken from '../generators/Chicken';
 import Grass from '../generators/Ground/Grass';
+import Road from '../generators/Ground/Road';
+import Three from '../generators/Three';
 
 export default function Game() {
     const mountRef = useRef(null);
@@ -11,6 +13,7 @@ export default function Game() {
         scene.background = new THREE.Color('#141517');
 
         const distance = 500;
+        let height;
 
         const camera = new THREE.OrthographicCamera(
             window.innerWidth / -2,
@@ -58,7 +61,7 @@ export default function Game() {
         const boardWidth = positionWidth * columns;
 
         // Test scene add ==============================================================================
-        scene.add(new Grass(zoom, boardWidth, positionWidth), Chicken(zoom));
+        scene.add(new Road(zoom, boardWidth, positionWidth), Chicken(zoom));
 
         const renderer = new THREE.WebGLRenderer({
             alpha: true,
