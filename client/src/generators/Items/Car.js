@@ -17,14 +17,7 @@ export default function Car(vechicleColors, zoom) {
 
     const cabin = new THREE.Mesh(
         new THREE.BoxBufferGeometry(33 * zoom, 24 * zoom, 12 * zoom),
-        [
-            new THREE.MeshPhongMaterial({ color: 0xcccccc, flatShading: true }),
-            new THREE.MeshPhongMaterial({ color: 0xcccccc, flatShading: true }),
-            new THREE.MeshPhongMaterial({ color: 0xcccccc, flatShading: true }),
-            new THREE.MeshPhongMaterial({ color: 0xcccccc, flatShading: true }),
-            new THREE.MeshPhongMaterial({ color: 0xcccccc, flatShading: true }), // top
-            new THREE.MeshPhongMaterial({ color: 0xcccccc, flatShading: true }), // bottom
-        ]
+        new THREE.MeshPhongMaterial({ color: 0xcccccc, flatShading: true })
     );
     cabin.position.x = 6 * zoom;
     cabin.position.z = 25.5 * zoom;
@@ -63,6 +56,16 @@ export default function Car(vechicleColors, zoom) {
     windowFront.castShadow = true;
     windowFront.receiveShadow = true;
     car.add(windowFront);
+
+    const mirror = new THREE.Mesh(
+        new THREE.BoxBufferGeometry(5 * zoom, 40 * zoom, 5 * zoom),
+        new THREE.MeshPhongMaterial({ color, flatShading: true })
+    );
+    mirror.position.z = 17 * zoom;
+    mirror.position.x = -7 * zoom;
+    mirror.castShadow = true;
+    mirror.receiveShadow = true;
+    car.add(mirror);
 
     return car;
 }
