@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import Chicken from '../generators/Chicken';
 import Grass from '../generators/Ground/Grass';
 import Road from '../generators/Ground/Road';
-import Three from '../generators/Three';
+import Tree from '../generators/Tree';
 
 export default function Game() {
     const mountRef = useRef(null);
