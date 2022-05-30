@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import Chicken from '../generators/Chicken';
 import Grass from '../generators/Ground/Grass';
 import Road from '../generators/Ground/Road';
+import Rails from '../generators/Ground/Rails';
 import Three from '../generators/Items/Three';
 import Car from '../generators/Items/Car';
 
@@ -64,11 +65,8 @@ export default function Game() {
         const vechicleColors = [0xa52523, 0xbdb638, 0x78b14b, 0x1a5b9c];
 
         // Test scene add ==============================================================================
-        scene.add(
-            new Road(zoom, boardWidth, positionWidth),
-            Chicken(zoom),
-            new Car(vechicleColors, zoom)
-        );
+
+        scene.add(new Rails(zoom, boardWidth, positionWidth), Chicken(zoom), new Car(vechicleColors, zoom));
 
         const renderer = new THREE.WebGLRenderer({
             alpha: true,
