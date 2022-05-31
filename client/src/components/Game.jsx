@@ -7,6 +7,7 @@ import Rails from '../generators/Ground/Rails';
 import Water from '../generators/Ground/Water';
 import Car from '../generators/Items/Car';
 import Truck from '../generators/Items/Truck';
+import generateLanes from '../generators/generateLanes';
 
 export default function Game() {
     const mountRef = useRef(null);
@@ -64,15 +65,51 @@ export default function Game() {
         const boardWidth = positionWidth * columns;
 
         const vechicleColors = [0xa52523, 0xbdb638, 0x78b14b, 0x1a5b9c];
+        const chicken = new Chicken(zoom)
+        scene.add(chicken);
+        // =============================================================================================
+        let lanes;
+        let currentLane;
+        let currentColumn;
+
+        let previousTimestamp;
+        let startMoving;
+        let moves;
+        let stepStartTimestamp;
+
+        const initaliseValues = () => {
+            lanes = generateLanes(zoom,boardWidth, positionWidth, scene, vechicleColors, height);
+            console.log('lanes}}}}}', lanes)
+            currentLane = 0;
+            currentColumn = Math.floor(columns / 2);
+
+            previousTimestamp = null;
+
+            startMoving = false;
+            moves = [];
+            // stepStartTimestamp;
+
+            chicken.position.x = 0;
+            chicken.position.y = 0;
+
+            camera.position.y = initialCameraPositionY;
+            camera.position.x = initialCameraPositionX;
+
+            dirLight.position.x = initialDirLightPositionX;
+            dirLight.position.y = initialDirLightPositionY;
+        };
+
+        initaliseValues();
+
 
         // Test scene add ==============================================================================
         // scene.add(new Road(zoom, boardWidth, positionWidth), Chicken(zoom));
 
-        scene.add(
-            new Water(zoom, boardWidth, positionWidth),
-            Chicken(zoom),
-            new Truck(zoom, vechicleColors)
-        );
+        // scene.add(
+        //     new Water(zoom, boardWidth, positionWidth),
+        //     Chicken(zoom),
+        //     new Truck(zoom, vechicleColors)
+        // );
 
         const renderer = new THREE.WebGLRenderer({
             alpha: true,
