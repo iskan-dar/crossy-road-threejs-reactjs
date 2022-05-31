@@ -3,7 +3,10 @@ import * as THREE from 'three';
 import Chicken from '../generators/Chicken';
 import Grass from '../generators/Ground/Grass';
 import Road from '../generators/Ground/Road';
-import Tree from '../generators/Tree';
+import Tree from '../generators/Items/Tree';
+import Car from '../generators/Items/Car';
+import Water from '../generators/Ground/Water';
+
 
 export default function Game() {
     const mountRef = useRef(null);
@@ -60,8 +63,11 @@ export default function Game() {
         const columns = 17;
         const boardWidth = positionWidth * columns;
 
+        const vechicleColors = [0xa52523, 0xbdb638, 0x78b14b, 0x1a5b9c];
+
         // Test scene add ==============================================================================
-        scene.add(new Road(zoom, boardWidth, positionWidth), Chicken(zoom));
+        // scene.add(new Road(zoom, boardWidth, positionWidth), Chicken(zoom));
+        scene.add(new Water(zoom, boardWidth, positionWidth))
 
         const renderer = new THREE.WebGLRenderer({
             alpha: true,
