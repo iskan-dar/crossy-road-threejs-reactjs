@@ -3,6 +3,7 @@ import Wheel from './Wheel';
 
 export default function Car(vechicleColors, zoom) {
     const car = new THREE.Group();
+    car.name = 'Car'
     const color =
         vechicleColors[Math.floor(Math.random() * vechicleColors.length)];
 

@@ -6,6 +6,7 @@ export default function Stones(zoom) {
     const stonesHeights = [{dir: 'x', value: 15}, {dir: 'y', value: -15}];
 
     const stone = new THREE.Group();
+    console.log()
 
     const large = new THREE.Mesh(
         new THREE.BoxBufferGeometry(15 * zoom, 15 * zoom, 26 * zoom),

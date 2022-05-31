@@ -6,6 +6,7 @@ import Road from '../generators/Ground/Road';
 import Rails from '../generators/Ground/Rails';
 import Three from '../generators/Items/Three';
 import Car from '../generators/Items/Car';
+import Truck from '../generators/Items/Truck';
 
 export default function Game() {
     const mountRef = useRef(null);
@@ -66,7 +67,8 @@ export default function Game() {
 
         // Test scene add ==============================================================================
 
-        scene.add(new Rails(zoom, boardWidth, positionWidth), Chicken(zoom), new Car(vechicleColors, zoom));
+        scene.add(new Road(zoom, boardWidth, positionWidth), Chicken(zoom), Truck(zoom, vechicleColors));
+        console.log(scene.children)
 
         const renderer = new THREE.WebGLRenderer({
             alpha: true,

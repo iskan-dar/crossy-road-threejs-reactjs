@@ -3,7 +3,8 @@ import Barrier from './Barrier';
 
 export default function Rails(zoom, boardWidth, positionWidth) {
   const rails = new THREE.Group();
-
+  rails.name = 'Rails'
+  
   const createSection = (color) =>
     new THREE.Mesh(
       new THREE.PlaneBufferGeometry(

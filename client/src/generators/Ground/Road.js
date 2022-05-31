@@ -2,6 +2,7 @@ import * as THREE from 'three';
 
 export default function Road(zoom, boardWidth, positionWidth) {
     const road = new THREE.Group();
+    road.name = 'Road';
 
     const createSection = (color) =>
         new THREE.Mesh(
@@ -27,10 +28,13 @@ export default function Road(zoom, boardWidth, positionWidth) {
     for (let i = 0; i < 12; i++) {
         const whiteStripe = new THREE.Mesh(
             new THREE.BoxBufferGeometry(20 * zoom, 5 * zoom, 1 * zoom),
-            new THREE.MeshLambertMaterial({ color: '#ffffff', flatShading: true })
+            new THREE.MeshLambertMaterial({
+                color: '#ffffff',
+                flatShading: true,
+            })
         );
         whiteStripe.position.z = 1 * zoom;
-        whiteStripe.position.x = -660 + (i * 60) * zoom;
+        whiteStripe.position.x = -660 + i * 60 * zoom;
         road.add(whiteStripe);
     }
 

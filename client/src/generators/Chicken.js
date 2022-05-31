@@ -4,6 +4,7 @@ export default function Chicken(zoom) {
     const chickenSize = 15;
 
     const chicken = new THREE.Group();
+    chicken.name = 'Chicken';
 
     const body = new THREE.Mesh(
         new THREE.BoxBufferGeometry(

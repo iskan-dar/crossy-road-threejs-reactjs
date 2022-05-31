@@ -2,6 +2,7 @@ import * as THREE from 'three';
 
 export default function Grass(zoom, boardWidth, positionWidth) {
     const grass = new THREE.Group();
+    grass.name = "Grass"
 
     const createSection = (color) =>
         new THREE.Mesh(
