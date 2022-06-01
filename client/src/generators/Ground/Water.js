@@ -26,6 +26,6 @@ export default function Water(zoom, boardWidth, positionWidth) {
     right.position.x = boardWidth * zoom;
     water.add(right);
 
-    water.position.z = 1.5 * zoom;
+    water.position.z = -1 * zoom;
     return water;
 }

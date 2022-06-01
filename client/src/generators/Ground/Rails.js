@@ -30,7 +30,7 @@ export default function Rails(zoom, boardWidth, positionWidth) {
     new THREE.MeshLambertMaterial({ color: '#9a95b4', flatShading: true })
   );
   rightRail.position.z = 5;
-  rightRail.position.y = 26;
+  rightRail.position.y = 20;
   rails.add(rightRail);
 
   const leftRail = new THREE.Mesh(
@@ -38,11 +38,12 @@ export default function Rails(zoom, boardWidth, positionWidth) {
     new THREE.MeshLambertMaterial({ color: '#9a95b4', flatShading: true })
   );
   leftRail.position.z = 5;
-  leftRail.position.y = -26;
+  leftRail.position.y = -20;
   rails.add(leftRail);
+
   for (let i = 0; i < 34; i++) {
     const sleeper = new THREE.Mesh(
-      new THREE.BoxBufferGeometry(5 * zoom, 40 * zoom, 2 * zoom),
+      new THREE.BoxBufferGeometry(5 * zoom, 30 * zoom, 2 * zoom),
       new THREE.MeshLambertMaterial({ color: '#744441', flatShading: true })
     );
     sleeper.position.z = 1 * zoom;

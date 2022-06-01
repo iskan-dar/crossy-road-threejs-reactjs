@@ -2,12 +2,13 @@ import * as THREE from 'three';
 export default function Barrier(zoom) {
   const barrier = new THREE.Group();
   const color = ['#83272d', '#ffffff']
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 9; i++) {
     const block = new THREE.Mesh(
       new THREE.BoxBufferGeometry(8 * zoom, 5 * zoom, 7 * zoom),
       new THREE.MeshLambertMaterial({ color: (i % 2 === 0 ? color[0] : color[1]), flatShading: true })
     )
-    block.position.y = -66;
+    block.position.x = -210;
+    block.position.y = -32;
     block.position.z = i * 14;
     barrier.add(block)
   }
@@ -16,7 +17,8 @@ export default function Barrier(zoom) {
     new THREE.BoxBufferGeometry(35 * zoom, 5 * zoom, 15 * zoom),
     new THREE.MeshLambertMaterial({ color: '#5b676d', flatShading: true })
   )
-  display.position.y = -70;
+  display.position.x = -210;
+  display.position.y = -36;
   display.position.z = 90;
   barrier.add(display)
   
@@ -25,8 +27,8 @@ export default function Barrier(zoom) {
     new THREE.BoxBufferGeometry(5 * zoom, 10 * zoom, 5 * zoom),
     new THREE.MeshLambertMaterial({ color: '#d81a31', flatShading: true })
   )
-  rightStopSignal.position.x = -20;
-  rightStopSignal.position.y = -70;
+  rightStopSignal.position.x = -190;
+  rightStopSignal.position.y = -36;
   rightStopSignal.position.z = 90;
   barrier.add(rightStopSignal)
 
@@ -34,8 +36,8 @@ export default function Barrier(zoom) {
     new THREE.BoxBufferGeometry(5 * zoom, 10 * zoom, 5 * zoom),
     new THREE.MeshLambertMaterial({ color: '#d81a31', flatShading: true })
   )
-  leftStopSignal.position.x = 20;
-  leftStopSignal.position.y = -70;
+  leftStopSignal.position.x = -230;
+  leftStopSignal.position.y = -36;
   leftStopSignal.position.z = 90;
   barrier.add(leftStopSignal)
 
