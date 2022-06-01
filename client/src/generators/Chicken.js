@@ -3,7 +3,9 @@ import * as THREE from 'three';
 export default function Chicken(zoom) {
     const chickenSize = 15;
 
+
     const chicken = new THREE.Group();
+    chicken.name = 'Chicken'
 
     const body = new THREE.Mesh(
         new THREE.BoxBufferGeometry(
@@ -51,9 +53,9 @@ export default function Chicken(zoom) {
         new THREE.BoxBufferGeometry(2 * zoom, 4 * zoom, 5 * zoom),
         new THREE.MeshLambertMaterial({ color: '#ffe100', flatShading: true })
     );
-    beak.position.z = 18 * zoom;
-    beak.position.y = -15 * zoom;
-    beak.position.x = 2 * zoom;
+    beak.position.z = 12 * zoom;
+    beak.position.y = 8 * zoom;
+    beak.position.x = 0 * zoom;
     beak.castShadow = true;
     beak.receiveShadow = false;
     chicken.add(beak);
