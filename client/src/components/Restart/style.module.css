@@ -1,17 +1,8 @@
-.game {
-    position: relative;
-}
-
-.end {
-    position: absolute;
-    top: 70%;
-    left: 35%;
-    width: 400px;
-    height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #ffffffd5;
+.restartBtn {
+    font-size: 26px;
+    padding: 16px;
+    background-color: #c52121;
     border-radius: 16px;
-    /* visibility: hidden; */
-  }
+    color: #ffffff;
+    border: none;
+}
