@@ -7,6 +7,7 @@ import Truck from './Items/Truck';
 import Raft from './Items/Raft'
 import Pad from './Items/Pad';
 import Rails from './Ground/Rails';
+import Train from './Items/Train';
 
 const laneTypes = ['railroad', 'car', 'truck', 'forest', 'river', 'waterpads'];
 const laneSpeeds = [2, 2.5, 3];
@@ -26,8 +27,27 @@ export default function Lane(index, zoom, boardWidth, positionWidth, vechicleCol
             break;
         }
         case 'railroad': {
-            this.type = 'field';
             this.mesh = new Rails(zoom, boardWidth, positionWidth);
+            this.direction = Math.random() >= 0.5;
+
+            const occupiedPositions = new Set();
+            this.trains = [1].map(() => {
+                const train = new Train(zoom);
+                let position;
+                do {
+                    position = Math.floor((Math.random() * boardWidth/positionWidth) / 2);
+                } while (occupiedPositions.has(position));
+                occupiedPositions.add(position);
+                train.position.x =
+                    (position * positionWidth * 2 + positionWidth / 2) * zoom -
+                    (boardWidth * zoom) / 2;
+                if (!this.direction) train.rotation.z = Math.PI;
+                this.mesh.add(train);
+                return train;
+            });
+
+            this.speed =
+                laneSpeeds[Math.floor(Math.random() * laneSpeeds.length)];
             break;
         }
         case 'forest': {
