@@ -11,6 +11,7 @@ import Car from '../generators/Items/Car';
 import Truck from '../generators/Items/Truck';
 import generateLanes from '../generators/generateLanes';
 import Lane from '../generators/Lane';
+import myReact from '../generators/Texts/myReact';
 import Restart from './Restart/Restart';
 
 export default function Game() {
@@ -93,6 +94,13 @@ export default function Game() {
         const vechicleColors = [0xa52523, 0xbdb638, 0x78b14b, 0x1a5b9c];
         const chicken = new Chicken(zoom)
         scene.add(chicken);
+
+        const text = new myReact()
+        text.castShadow = true
+        text.position.z = -4
+        // text.rotation.x = 1.6
+        scene.add(text)
+        console.log('TEXT !!!!!!!!', text)
 
         const initaliseValues = () => {
             lanes = generateLanes(zoom,boardWidth, positionWidth, scene, vechicleColors, height);
