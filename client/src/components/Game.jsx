@@ -1,3 +1,4 @@
+/* eslint-disable default-case */
 import React, { useRef, useEffect } from 'react';
 import * as THREE from 'three';
 import Chicken from '../generators/Chicken';
@@ -116,9 +117,9 @@ export default function Game() {
             scene.add(lane.mesh);
             lanes.push(lane);
           }
+
+
           
-
-
         // Test scene add ==============================================================================
         // scene.add(new Road(zoom, boardWidth, positionWidth), Chicken(zoom));
 
@@ -135,7 +136,7 @@ export default function Game() {
               if(move === 'left') return {lane: position.lane, column: position.column - 1};
               if(move === 'right') return {lane: position.lane, column: position.column + 1};
             }, {lane: currentLane, column: currentColumn})
-          
+
             // console.log(finalPositions)
 
             if (direction === 'forward') {
@@ -190,27 +191,34 @@ export default function Game() {
 
           window.addEventListener("keyup", event => {
             if (event.keyCode == '38') {
-              console.log(chicken.position.y)
+              console.log('currentColumn}}}}}}', currentColumn)
+              console.log('chickenPosition}}}}}', chicken.position.x)
               chicken.scale.z = 1
               move('forward')
-              cameraSpeed += 0.01
+            //   cameraSpeed += 0.01
             }
             else if (event.keyCode == '40') {
               // down arrow
               chicken.scale.z = 1
               console.log('backward');
+              console.log('currentColumn}}}}}}', currentColumn)
+              console.log('chickenPosition}}}}}', chicken.position.x)
               move('backward')
             }
             else if (event.keyCode == '37') {
               // left arrow
               chicken.scale.z = 1
               console.log('left');
+              console.log('currentColumn}}}}}}', currentColumn)
+              console.log('chickenPosition}}}}}', chicken.position.x)
               move('left')
             }
             else if (event.keyCode == '39') {
               // right arrow
               chicken.scale.z = 1
               console.log('right');
+              console.log('currentColumn}}}}}}', currentColumn)
+              console.log('chickenPosition}}}}}', chicken.position.x)
               move('right')
             }
           });
@@ -228,11 +236,11 @@ export default function Game() {
         // requestAnimationFrame( animate );
         function animate(timestamp) {
             requestAnimationFrame( animate );
-          
+
             if(!previousTimestamp) previousTimestamp = timestamp;
             const delta = timestamp - previousTimestamp;
             previousTimestamp = timestamp;
-          
+
             // Animate cars and trucks moving on the lane
             lanes.forEach(lane => {
               if (lane.type === 'car' || lane.type === 'truck') {
@@ -250,24 +258,24 @@ export default function Game() {
               if (lane.type === 'river') {
                 const aBitBeforeTheBeginingOfLane = -boardWidth*zoom/2 - positionWidth*2*zoom;
                 const aBitAfterTheEndOFLane = boardWidth*zoom/2 + positionWidth*2*zoom;
-                lane.rafts.forEach(rafts => {
+                lane.rafts.forEach(raft => {
                   if(lane.direction) {
-                    rafts.position.x = rafts.position.x < aBitBeforeTheBeginingOfLane ? aBitAfterTheEndOFLane : rafts.position.x -= lane.speed/16*delta;
+                    raft.position.x = raft.position.x < aBitBeforeTheBeginingOfLane ? aBitAfterTheEndOFLane : raft.position.x -= lane.speed/16*delta;
                   }else{
-                    rafts.position.x = rafts.position.x > aBitAfterTheEndOFLane ? aBitBeforeTheBeginingOfLane : rafts.position.x += lane.speed/16*delta;
+                    raft.position.x = raft.position.x > aBitAfterTheEndOFLane ? aBitBeforeTheBeginingOfLane : raft.position.x += lane.speed/16*delta;
                   }
                 });
               }
 
 
             });
-            
-          
+
+
             if(startMoving) {
               stepStartTimestamp = timestamp;
               startMoving = false;
             }
-          
+
             if(stepStartTimestamp) {
               const moveDeltaTime = timestamp - stepStartTimestamp;
               const moveDeltaDistance = Math.min(moveDeltaTime/stepTime,1)*positionWidth*zoom;
@@ -277,11 +285,11 @@ export default function Game() {
                   const positionY = currentLane*positionWidth*zoom + moveDeltaDistance;
                 //   console.log(chicken)
                 if (chicken.position.y - 600 > camera.position.y) {
-                    camera.position.y = initialCameraPositionY + positionY; 
+                    camera.position.y = initialCameraPositionY + positionY;
                 }
-                  dirLight.position.y = initialDirLightPositionY + positionY; 
+                  dirLight.position.y = initialDirLightPositionY + positionY;
                   chicken.position.y = positionY; // initial chicken position is 0
-          
+
                   chicken.position.z = jumpDeltaDistance;
                   chicken.rotation.z = 0
                   break;
@@ -289,17 +297,17 @@ export default function Game() {
                 case 'backward': {
                   positionY = currentLane*positionWidth*zoom - moveDeltaDistance
                 //   camera.position.y = initialCameraPositionY + positionY;
-                  dirLight.position.y = initialDirLightPositionY + positionY; 
+                  dirLight.position.y = initialDirLightPositionY + positionY;
                   chicken.position.y = positionY;
-          
+
                   chicken.position.z = jumpDeltaDistance;
                   chicken.rotation.z = 3.15
                   break;
                 }
                 case 'left': {
                   const positionX = (currentColumn*positionWidth+positionWidth/2)*zoom -boardWidth*zoom/2 - moveDeltaDistance;
-                  camera.position.x = initialCameraPositionX + positionX;     
-                  dirLight.position.x = initialDirLightPositionX + positionX; 
+                  camera.position.x = initialCameraPositionX + positionX;
+                  dirLight.position.x = initialDirLightPositionX + positionX;
                   chicken.position.x = positionX; // initial chicken position is 0
                   chicken.position.z = jumpDeltaDistance;
                   chicken.rotation.z = 1.6
@@ -307,10 +315,10 @@ export default function Game() {
                 }
                 case 'right': {
                   const positionX = (currentColumn*positionWidth+positionWidth/2)*zoom -boardWidth*zoom/2 + moveDeltaDistance;
-                  camera.position.x = initialCameraPositionX + positionX;        
+                  camera.position.x = initialCameraPositionX + positionX;
                   dirLight.position.x = initialDirLightPositionX + positionX;
-                  chicken.position.x = positionX; 
-          
+                  chicken.position.x = positionX;
+
                   chicken.position.z = jumpDeltaDistance;
                   chicken.rotation.z = 4.7
 
@@ -321,7 +329,7 @@ export default function Game() {
               if(moveDeltaTime > stepTime) {
                 switch(moves[0]) {
                   case 'forward': {
-                    currentLane++; 
+                    currentLane++;
                     break;
                   }
                   case 'backward': {
@@ -342,12 +350,12 @@ export default function Game() {
                 stepStartTimestamp = moves.length === 0 ? null : timestamp;
               }
             }
-            
+
             // Hit test
             if(lanes[currentLane].type === 'car' || lanes[currentLane].type === 'truck') {
               const chickenMinX = chicken.position.x - chickenSize*zoom/2;
               const chickenMaxX = chicken.position.x + chickenSize*zoom/2;
-              const vechicleLength = { car: 60, truck: 105}[lanes[currentLane].type]; 
+              const vechicleLength = { car: 60, truck: 105}[lanes[currentLane].type];
               lanes[currentLane].vechicles.forEach(vechicle => {
                 const carMinX = vechicle.position.x - vechicleLength*zoom/2;
                 const carMaxX = vechicle.position.x + vechicleLength*zoom/2;
@@ -355,28 +363,51 @@ export default function Game() {
                 //   endDOM.style.visibility = 'visible';
                 // }
               });
-          
             }
-            renderer.render( scene, camera );	
+
+            if(lanes[currentLane].type === 'river') {
+              const chickenMinX = chicken.position.x - chickenSize*zoom/2;
+              const chickenMaxX = chicken.position.x + chickenSize*zoom/2;
+            //   console.log(lanes[currentLane].rafts, chicken)
+              lanes[currentLane].rafts.forEach(raft => {
+
+                const raftMinX = raft.position.x - raft.geometry.parameters.width*zoom/2;
+                const raftMaxX = raft.position.x + raft.geometry.parameters.width*zoom/2;
+                if(chickenMaxX > raftMinX && chickenMinX < raftMaxX) {
+
+                    chicken.position.x = raft.position.x
+
+                    currentColumn = 17 - Math.round(( 1428 - (672 + chicken.position.x))/84)
+                    camera.position.x = (chicken.position.x)
+                    // currentColumn = columns - Math.round(( boardWidth*zoom - (672 + chicken.position.x))/ positionWidth*zoom)
+                //   endDOM.style.visibility = 'visible';
+                // lanes[currentLane].direction
+                // ? (chicken.position.x -= lanes[currentLane].speed)
+                // : (chicken.position.x += lanes[currentLane].speed);
+                }
+              });
+            }
+            // console.log(lanes[currentLane])
+
+            renderer.render( scene, camera );
           }
-        
+
 
           let timer
-        
+
           if (chicken.position.y - 600 < camera.position.y + 100) {
             console.log('!!!!!!!!')
             timer = setInterval(() => {
                 camera.position.y += cameraSpeed
-                
+
               }, 15);
           } else {
               console.log('????????')
             clearInterval(timer)
           }
 
-
           requestAnimationFrame( animate );
-        
+
         renderer.render(scene, camera);
     }, []);
 
