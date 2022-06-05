@@ -13,15 +13,15 @@ export default function Grass(zoom, boardWidth, positionWidth) {
             new THREE.MeshPhongMaterial({ color })
         );
 
-    const middle = createSection(0xbaf455);
+    const middle = createSection('#1BB232');
     middle.receiveShadow = true;
     grass.add(middle);
 
-    const left = createSection(0x99c846);
+    const left = createSection('#178628');
     left.position.x = -boardWidth * zoom;
     grass.add(left);
 
-    const right = createSection(0x99c846);
+    const right = createSection('#178628');
     right.position.x = boardWidth * zoom;
     grass.add(right);
 
