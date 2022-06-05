@@ -9,6 +9,6 @@ export default function Restart({restart, setRestart}) {
   }
 
   return (
-    <button onClick={restartHandler} id='retry' className={style.restartBtn}>restart</button>
+    <button onClick={restartHandler} id='retry' className={style.restartBtn}>Restart</button>
   )
 }

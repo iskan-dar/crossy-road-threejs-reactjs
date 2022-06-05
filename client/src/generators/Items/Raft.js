@@ -12,6 +12,5 @@ export default function Raft(zoom, positionWidth) {
         new THREE.MeshPhongMaterial({ color: '#9c6644', flatShading: true })
     );
     raft.position.z = 2 * zoom;
-    raft.position.y = -6 * zoom;
     return raft;
 }
