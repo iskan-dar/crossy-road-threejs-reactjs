@@ -55,7 +55,7 @@ export default function Lane(index, zoom, boardWidth, positionWidth, vechicleCol
             this.mesh = new Grass(zoom, boardWidth, positionWidth);
 
             this.occupiedPositions = new Set();
-            this.trees = [1, 2, 3, 4].map(() => {
+            this.trees = [1, 2, 3, 4, 5, 6].map(() => {
                 const tree = new Tree(zoom, height);
                 let position;
                 do {
