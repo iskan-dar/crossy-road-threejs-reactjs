@@ -8,6 +8,7 @@ import Raft from './Items/Raft'
 import Pad from './Items/Pad';
 import Rails from './Ground/Rails';
 import Train from './Items/Train';
+import Coin from './Items/Coin';
 
 const laneTypes = ['railroad', 'car', 'truck', 'forest', 'river', 'waterpads'];
 const laneSpeeds = [2, 2.5, 3];
@@ -40,7 +41,7 @@ export default function Lane(index, zoom, boardWidth, positionWidth, vechicleCol
                 occupiedPositions.add(position);
                 train.position.x =
                     (position * positionWidth * 2 + positionWidth / 2) * zoom -
-                    (boardWidth * zoom) / 2;
+                    (boardWidth * zoom) / 2; 
                 if (!this.direction) train.rotation.z = Math.PI;
                 this.mesh.add(train);
                 return train;
@@ -67,6 +68,18 @@ export default function Lane(index, zoom, boardWidth, positionWidth, vechicleCol
                 this.mesh.add(tree);
                 return tree;
             });
+
+            const coin = new Coin(zoom)
+            let coinPosition;
+            coinPosition = Math.floor(Math.random() * boardWidth/positionWidth);
+            let rand = 0 + Math.random() * (2 + 1 - 0);
+            
+            if (rand > 2) {
+                coin.position.x = (coinPosition * positionWidth + positionWidth / 2) * zoom -
+                (boardWidth * zoom) / 2;
+                this.mesh.add(coin)
+            }
+
             break;
         }
         case 'car': {
