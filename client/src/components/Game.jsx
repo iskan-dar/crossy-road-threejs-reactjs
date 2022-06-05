@@ -9,6 +9,8 @@ import myReact from '../generators/Texts/myReact';
 import Restart from './Restart/Restart';
 import Score from './Score/Score';
 
+import Billboard from '../generators/Items/Billboard';
+
 
 export default function Game() {
     const mountRef = useRef(null);
@@ -51,8 +53,12 @@ export default function Game() {
 
         const vechicleColors = [0xa52523, 0xbdb638, 0x78b14b, 0x1a5b9c];
         chicken.position.z = -1
-        scene.add(chicken);
+        
+        const billboard = new Billboard(zoom)
+        billboard.position.x = 21 * zoom * 13
+        billboard.position.y = 21 * zoom
 
+        scene.add(chicken, billboard);
 
         const hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.6);
         scene.add(hemiLight);
