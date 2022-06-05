@@ -1,0 +1,6 @@
+.score {
+    font-weight: 700;
+    font-size: 70px;
+    color: #ffffff;
+    text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+}

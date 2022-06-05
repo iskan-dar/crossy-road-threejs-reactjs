@@ -7,12 +7,14 @@ import generateLanes from '../generators/generateLanes';
 import Lane from '../generators/Lane';
 import myReact from '../generators/Texts/myReact';
 import Restart from './Restart/Restart';
+import Score from './Score/Score';
 
 
 export default function Game() {
     const mountRef = useRef(null);
     const [isDead, setIsDead] = useState(false);
     const [restart, setRestart] = useState(false);
+    const [score, setScore] = useState(0)
     let localIsDead = false;
     let lanes;
     const scene = new THREE.Scene();
@@ -203,6 +205,7 @@ export default function Game() {
               chicken.scale.z = 1
               move('forward')
               cameraSpeed += 0.01;
+              setScore(currentLane + 1)
             }
             else if (event.keyCode == '40' && localIsDead === false) {
               // down arrow
@@ -376,6 +379,23 @@ export default function Game() {
               });
             }
 
+            if(lanes[currentLane].type === 'railroad') {
+              console.log('1111111111')
+              const chickenMinX = chicken.position.x - chickenSize*zoom/2;
+              const chickenMaxX = chicken.position.x + chickenSize*zoom/2;
+              const vechicleLength = {railroad: 42*4*3}[lanes[currentLane].type];
+              lanes[currentLane].trains.forEach(train => {
+                const carMinX = train.position.x - vechicleLength*zoom/2;
+                const carMaxX = train.position.x + vechicleLength*zoom/2;
+                if (chickenMaxX > carMinX && chickenMinX < carMaxX) {
+                    localIsDead = true;
+                    setIsDead(true);
+                    chicken.scale.z = 0.2;
+                    cameraSpeed = 0;
+                }
+              });
+            }
+
             if(lanes[currentLane].type === 'river') {
               const chickenMinX = chicken.position.x - chickenSize*zoom/2;
               const chickenMaxX = chicken.position.x + chickenSize*zoom/2;
@@ -418,6 +438,9 @@ export default function Game() {
     return (
         <>
             <div className={style.game} ref={mountRef} />
+            <div className={style.scoreBox}>
+              <Score score={score}/>
+            </div>
             {isDead === true && restart === false ? (
                 <div className={style.end}>
                     <Restart restart={restart} setRestart={setRestart}/>
