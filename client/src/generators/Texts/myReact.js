@@ -4,6 +4,8 @@ import { TextGeometry } from '../../../node_modules/three/examples/jsm/geometrie
 
 export default function myReact(inputText) {
     const reactText = new THREE.Group()
+	reactText.castShadow = true;
+	reactText.receiveShadow = true;
 
     const loader = new FontLoader();
 
@@ -15,8 +17,8 @@ export default function myReact(inputText) {
 		height: 10,
 		curveSegments: 12,
 		bevelEnabled: true,
-		bevelThickness: 1.5,
-		bevelSize: 0.7,
+		bevelThickness: 1,
+		bevelSize: 0.5,
 		bevelOffset: 1,
 		bevelSegments: 1
 	} );
@@ -26,7 +28,7 @@ export default function myReact(inputText) {
 
     const mesh = new THREE.Mesh(
         geometry,
-        new THREE.MeshLambertMaterial({ color: '#256413', flatShading: true })
+        new THREE.MeshLambertMaterial({ color: '#e3e3e3', flatShading: true })
     );
 
     reactText.add(mesh)
