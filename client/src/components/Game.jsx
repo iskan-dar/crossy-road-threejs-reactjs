@@ -3,16 +3,11 @@ import React, { useRef, useEffect, useState } from 'react';
 import style from './style.module.css';
 import * as THREE from 'three';
 import Chicken from '../generators/Chicken';
-import Grass from '../generators/Ground/Grass';
-import Road from '../generators/Ground/Road';
-import Rails from '../generators/Ground/Rails';
-import Water from '../generators/Ground/Water';
-import Car from '../generators/Items/Car';
-import Truck from '../generators/Items/Truck';
 import generateLanes from '../generators/generateLanes';
 import Lane from '../generators/Lane';
 import myReact from '../generators/Texts/myReact';
 import Restart from './Restart/Restart';
+
 
 export default function Game() {
     const mountRef = useRef(null);
@@ -21,31 +16,40 @@ export default function Game() {
     let localIsDead = false;
     let lanes;
     const scene = new THREE.Scene();
+    const zoom = 2;
+    let chickenSize = 15;
+    let moves;
+    const chicken = new Chicken(zoom)
+    const distance = 500;
+    let height;
+    let cameraSpeed = 0.5;
+    let positionY;
+    let stepTime = 200;
+    let currentLane;
+    let currentColumn;
+    let previousTimestamp;
+    let startMoving;
+    let stepStartTimestamp;
+    
+    const positionWidth = 42;
+    const columns = 17;
+    const boardWidth = positionWidth * columns;
+
+    const camera = new THREE.OrthographicCamera(
+      window.innerWidth / -2,
+      window.innerWidth / 2,
+      window.innerHeight / 2,
+      window.innerHeight / -2,
+      0.1,
+      10000
+  );
 
     useEffect(() => {
         scene.background = new THREE.Color('#141517');
 
-        const distance = 500;
-        let height;
-        let cameraSpeed = 1.5;
-        let positionY;
-        let stepTime = 200;
-        let currentLane;
-        let currentColumn;
-        let previousTimestamp;
-        let startMoving;
-        let moves;
-        let stepStartTimestamp;
-        let chickenSize = 15
+        const vechicleColors = [0xa52523, 0xbdb638, 0x78b14b, 0x1a5b9c];
+        scene.add(chicken);
 
-        const camera = new THREE.OrthographicCamera(
-            window.innerWidth / -2,
-            window.innerWidth / 2,
-            window.innerHeight / 2,
-            window.innerHeight / -2,
-            0.1,
-            10000
-        );
 
         const hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.6);
         scene.add(hemiLight);
@@ -58,6 +62,7 @@ export default function Game() {
             initialDirLightPositionY,
             200
         );
+        dirLight.angle = Math.PI / 4;
         dirLight.castShadow = true;
         scene.add(dirLight);
 
@@ -86,21 +91,23 @@ export default function Game() {
         camera.position.x = initialCameraPositionX;
         camera.position.z = distance;
 
-        const zoom = 2;
-        const positionWidth = 42;
-        const columns = 17;
-        const boardWidth = positionWidth * columns;
-
-        const vechicleColors = [0xa52523, 0xbdb638, 0x78b14b, 0x1a5b9c];
-        const chicken = new Chicken(zoom)
-        scene.add(chicken);
-
-        const text = new myReact()
+        const text = new myReact('Hi, my name is Anton Atnagulov')
         text.castShadow = true
-        text.position.z = -4
-        // text.rotation.x = 1.6
-        scene.add(text)
-        console.log('TEXT !!!!!!!!', text)
+        text.position.z = -2
+        text.position.x = (-boardWidth/2) * zoom + 100
+        text.position.y = -200
+
+        const text2 = new myReact('I am a frontend developer')
+        text2.position.z = -2
+        text2.position.x = (-boardWidth/2) * zoom + 400
+        text2.position.y = -350
+
+        const text3 = new myReact('Jump ahead to see my stack')
+        text3.position.z = -2
+        text3.position.x = (-boardWidth/2) * zoom + 100
+        text3.position.y = -500
+
+        scene.add(text, text2, text3)
 
         const initaliseValues = () => {
             lanes = generateLanes(zoom,boardWidth, positionWidth, scene, vechicleColors, height);
@@ -259,6 +266,18 @@ export default function Game() {
                 });
               }
 
+              if (lane.type === 'railroad') {
+                console.log()
+                const aBitBeforeTheBeginingOfLane = -boardWidth*zoom/0.1 - positionWidth*2*zoom;
+                const aBitAfterTheEndOFLane = boardWidth*zoom/0.1 + positionWidth*2*zoom;
+                lane.trains.forEach(train => {
+                  if(lane.direction) {
+                    train.position.x = train.position.x < aBitBeforeTheBeginingOfLane ? aBitAfterTheEndOFLane : train.position.x -= lane.speed/0.7*delta;
+                  }else{
+                    train.position.x = train.position.x > aBitAfterTheEndOFLane ? aBitBeforeTheBeginingOfLane : train.position.x += lane.speed/0.7*delta;
+                  }
+                });
+              }
 
             });
 
@@ -295,7 +314,7 @@ export default function Game() {
                 }
                 case 'left': {
                   const positionX = (currentColumn*positionWidth+positionWidth/2)*zoom -boardWidth*zoom/2 - moveDeltaDistance;
-                  camera.position.x = initialCameraPositionX + positionX;
+                  // camera.position.x = initialCameraPositionX + positionX;
                   dirLight.position.x = initialDirLightPositionX + positionX;
                   chicken.position.x = positionX; // initial chicken position is 0
                   chicken.position.z = jumpDeltaDistance;
@@ -304,7 +323,7 @@ export default function Game() {
                 }
                 case 'right': {
                   const positionX = (currentColumn*positionWidth+positionWidth/2)*zoom -boardWidth*zoom/2 + moveDeltaDistance;
-                  camera.position.x = initialCameraPositionX + positionX;
+                  // camera.position.x = initialCameraPositionX + positionX;
                   dirLight.position.x = initialDirLightPositionX + positionX;
                   chicken.position.x = positionX;
 
@@ -367,7 +386,7 @@ export default function Game() {
                 if(chickenMaxX > raftMinX && chickenMinX < raftMaxX) {
                     chicken.position.x = raft.position.x
                     currentColumn = 17 - Math.round(( 1428 - (672 + chicken.position.x))/84)
-                    camera.position.x = (chicken.position.x)
+                    // camera.position.x = (chicken.position.x)
                     dirLight.position.x = (chicken.position.x)
                 }
               });
@@ -385,15 +404,21 @@ export default function Game() {
             clearInterval(timer);
         }
 
-          requestAnimationFrame( animate );
+        if (restart) {
+          lanes.forEach(lane => scene.remove( lane.mesh ));
+          scene.clear()
+          window.location.reload()
+        }
+      
+        requestAnimationFrame( animate );
 
         renderer.render(scene, camera);
-    }, []);
+    }, [restart]);
 
     return (
         <>
             <div className={style.game} ref={mountRef} />
-            {isDead === true ? (
+            {isDead === true && restart === false ? (
                 <div className={style.end}>
                     <Restart restart={restart} setRestart={setRestart}/>
                 </div>
