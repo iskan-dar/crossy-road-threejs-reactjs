@@ -5,7 +5,7 @@ export default function Raft(zoom, positionWidth) {
 
     const raft = new THREE.Mesh(
         new THREE.BoxBufferGeometry(
-            60 * zoom,
+            42 * zoom,
             30 * zoom,
             5 * zoom
         ),

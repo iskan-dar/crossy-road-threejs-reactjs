@@ -41,7 +41,7 @@ export default function Lane(index, zoom, boardWidth, positionWidth, vechicleCol
                 occupiedPositions.add(position);
                 train.position.x =
                     (position * positionWidth * 2 + positionWidth / 2) * zoom -
-                    (boardWidth * zoom) / 2; 
+                    (boardWidth * zoom) / 2;
                 if (!this.direction) train.rotation.z = Math.PI;
                 this.mesh.add(train);
                 return train;
@@ -73,7 +73,7 @@ export default function Lane(index, zoom, boardWidth, positionWidth, vechicleCol
             let coinPosition;
             coinPosition = Math.floor(Math.random() * boardWidth/positionWidth);
             let rand = Math.floor(1 + Math.random() * (5 + 1 - 1));
-            
+
             if (rand > 2) {
                 coin.position.x = (coinPosition * positionWidth + positionWidth / 2) * zoom -
                 (boardWidth * zoom) / 2;
@@ -150,8 +150,7 @@ export default function Lane(index, zoom, boardWidth, positionWidth, vechicleCol
                 return raft;
             });
 
-            this.speed =
-                laneSpeeds[Math.floor(Math.random() * laneSpeeds.length)];
+            this.speed = 1.5;
             break;
         }
         case 'waterpads': {

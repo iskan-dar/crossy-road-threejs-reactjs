@@ -33,7 +33,7 @@ export default function Game() {
     let previousTimestamp;
     let startMoving;
     let stepStartTimestamp;
-    
+
     const positionWidth = 42;
     const columns = 17;
     const boardWidth = positionWidth * columns;
@@ -52,7 +52,7 @@ export default function Game() {
 
         const vechicleColors = [0xa52523, 0xbdb638, 0x78b14b, 0x1a5b9c];
         chicken.position.z = -1
-        
+
         const billboard = new Billboard(zoom, 'Redux', '#B845F2')
         billboard.position.x = 21 * zoom * 13
         billboard.position.y = 21 * zoom
@@ -121,7 +121,8 @@ export default function Game() {
         scene.add(text, text2, text3)
 
         const initaliseValues = () => {
-            lanes = generateLanes(zoom,boardWidth, positionWidth, scene, vechicleColors, height);
+            lanes = generateLanes(zoom, boardWidth, positionWidth, scene, vechicleColors, height);
+
             currentLane = 0;
             currentColumn = Math.floor(columns / 2);
 
@@ -145,7 +146,10 @@ export default function Game() {
 
         const addLane = () => {
             const index = lanes.length;
-            const lane = new Lane(index, zoom, boardWidth, positionWidth, vechicleColors, height);
+            let lane = new Lane(index, zoom, boardWidth, positionWidth, vechicleColors, height);
+            while(lanes[lanes.length-1].type === 'waterpads' && lane.type === 'waterpads'){
+                lane = new Lane(index, zoom, boardWidth, positionWidth, vechicleColors, height);
+            }
             lane.mesh.position.y = index*positionWidth*zoom;
             scene.add(lane.mesh);
             lanes.push(lane);
@@ -418,15 +422,15 @@ export default function Game() {
                 [padsArr[3] + 42, padsArr[4] - 42],
                 [padsArr[4] + 42, 672]
               ]
+              console.log(holes)
 
               const chickenMinX = chicken.position.x - chickenSize*zoom/2;
               const chickenMaxX = chicken.position.x + chickenSize*zoom/2;
-              const padLength = {waterpads: 42 * zoom}[lanes[currentLane].type];
 
               holes.forEach((hole, index) => {
                 const holeMinX = hole[0];
                 const holeMaxX = hole[1];
-                if (chickenMaxX > holeMinX && chickenMinX < holeMaxX) {
+                if (chickenMaxX > holeMinX && chickenMinX < holeMaxX && holeMaxX !== holeMinX) {
                     localIsDead = true;
                     setIsDead(true);
                     chicken.scale.z = 0.2;
@@ -438,7 +442,34 @@ export default function Game() {
             if(lanes[currentLane].type === 'river') {
               const chickenMinX = chicken.position.x - chickenSize*zoom/2;
               const chickenMaxX = chicken.position.x + chickenSize*zoom/2;
-              
+
+              const raftsArr = [];
+              lanes[currentLane].rafts.forEach(raft => {
+                raftsArr.push(Number(raft.position.x))
+              });
+
+              raftsArr.sort((a,b) => {
+                return a - b
+              });
+
+              let holes = [
+                [-672, raftsArr[0] - 60],
+                [raftsArr[0] + 60, raftsArr[1] - 60],
+                [raftsArr[1] + 60, raftsArr[2] - 60],
+                [raftsArr[2] + 60, 672],
+              ];
+
+              holes.forEach((hole, index) => {
+                const holeMinX = hole[0];
+                const holeMaxX = hole[1];
+                if (chickenMaxX > holeMinX && chickenMinX < holeMaxX) {
+                    localIsDead = true;
+                    setIsDead(true);
+                    chicken.scale.z = 0.2;
+                    cameraSpeed = 0;
+                }
+              });
+
               lanes[currentLane].rafts.forEach(raft => {
                 const raftMinX = raft.position.x - raft.geometry.parameters.width/2;
                 const raftMaxX = raft.position.x + raft.geometry.parameters.width/2;
@@ -473,7 +504,7 @@ export default function Game() {
           scene.clear()
           window.location.reload()
         }
-      
+
         requestAnimationFrame( animate );
 
         renderer.render(scene, camera);
