@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import logoRedux from '../Texts/logoRedux';
 
-export default function Billboard(zoom) {
+export default function Billboard(zoom, text, color) {
     const billboard = new THREE.Group();
 
     const stand = new THREE.Mesh(
@@ -19,7 +19,7 @@ export default function Billboard(zoom) {
 
     const boardColor = new THREE.Mesh(
         new THREE.BoxBufferGeometry(94 * zoom, 4 * zoom, 54 * zoom),
-        new THREE.MeshPhongMaterial({ color: '#B845F2', flatShading: true })
+        new THREE.MeshPhongMaterial({ color, flatShading: true })
     );
 
     boardColor.position.z = 100 * zoom
@@ -27,7 +27,7 @@ export default function Billboard(zoom) {
 
 
     
-    const logo = new logoRedux('Redux')
+    const logo = new logoRedux(text)
     logo.rotation.x = 1.6
     logo.position.x = -60
     logo.position.z = 95 * zoom

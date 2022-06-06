@@ -11,7 +11,6 @@ import Score from './Score/Score';
 
 import Billboard from '../generators/Items/Billboard';
 
-
 export default function Game() {
     const mountRef = useRef(null);
     const [isDead, setIsDead] = useState(false);
@@ -54,11 +53,15 @@ export default function Game() {
         const vechicleColors = [0xa52523, 0xbdb638, 0x78b14b, 0x1a5b9c];
         chicken.position.z = -1
         
-        const billboard = new Billboard(zoom)
+        const billboard = new Billboard(zoom, 'Redux', '#B845F2')
         billboard.position.x = 21 * zoom * 13
         billboard.position.y = 21 * zoom
 
-        scene.add(chicken, billboard);
+        const billboard2 = new Billboard(zoom, 'React', '#02B8E1')
+        billboard2.position.x = 21 * zoom * -13
+        billboard2.position.y = 21 * zoom
+
+        scene.add(chicken, billboard, billboard2);
 
         const hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.6);
         scene.add(hemiLight);
@@ -402,15 +405,28 @@ export default function Game() {
             if(lanes[currentLane].type === 'river') {
               const chickenMinX = chicken.position.x - chickenSize*zoom/2;
               const chickenMaxX = chicken.position.x + chickenSize*zoom/2;
+              
               lanes[currentLane].rafts.forEach(raft => {
+                console.log(raft.geometry.parameters.width)
 
-                const raftMinX = raft.position.x - raft.geometry.parameters.width*zoom/2;
-                const raftMaxX = raft.position.x + raft.geometry.parameters.width*zoom/2;
+                const raftMinX = raft.position.x - raft.geometry.parameters.width/2;
+                const raftMaxX = raft.position.x + raft.geometry.parameters.width/2;
                 if(chickenMaxX > raftMinX && chickenMinX < raftMaxX) {
                     chicken.position.x = raft.position.x
                     currentColumn = 17 - Math.round(( 1428 - (672 + chicken.position.x))/84)
                     // camera.position.x = (chicken.position.x)
                     dirLight.position.x = (chicken.position.x - 100)
+                    if (chicken.position.x > 672 || chicken.position.x < -672) {
+                      localIsDead = true;
+                      setIsDead(true);
+                      chicken.scale.x = 0.2;
+                    }
+                }
+                // Нужно найти истину
+                if(chickenMaxX < raftMinX || chickenMinX > raftMaxX) {
+                    localIsDead = true;
+                    setIsDead(true);
+                    chicken.position.z = -45;
                 }
               });
             }
