@@ -11,6 +11,8 @@ export default function Pad(zoom, positionWidth) {
 
     base.position.z = 1 * zoom;
     base.rotation.z = random
+    base.castShadow = true;
+    base.receiveShadow = true;
 
     const top = new THREE.Mesh(
         new THREE.BoxBufferGeometry(
@@ -23,6 +25,7 @@ export default function Pad(zoom, positionWidth) {
 
     top.position.z = 2 * zoom;
     top.rotation.z = random
+    top.receiveShadow = true;
 
     pad.add(base);
     pad.add(top);

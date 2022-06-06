@@ -72,7 +72,7 @@ export default function Lane(index, zoom, boardWidth, positionWidth, vechicleCol
             const coin = new Coin(zoom)
             let coinPosition;
             coinPosition = Math.floor(Math.random() * boardWidth/positionWidth);
-            let rand = 0 + Math.random() * (2 + 1 - 0);
+            let rand = Math.floor(1 + Math.random() * (5 + 1 - 1));
             
             if (rand > 2) {
                 coin.position.x = (coinPosition * positionWidth + positionWidth / 2) * zoom -
