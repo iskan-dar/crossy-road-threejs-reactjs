@@ -278,7 +278,6 @@ export default function Game() {
               }
 
               if (lane.type === 'railroad') {
-                console.log()
                 const aBitBeforeTheBeginingOfLane = -boardWidth*zoom/0.1 - positionWidth*2*zoom;
                 const aBitAfterTheEndOFLane = boardWidth*zoom/0.1 + positionWidth*2*zoom;
                 lane.trains.forEach(train => {
@@ -402,13 +401,45 @@ export default function Game() {
               });
             }
 
+            if(lanes[currentLane].type === 'waterpads') {
+              const padsArr = []
+              lanes[currentLane].pads.forEach(pad => {
+                padsArr.push(Number(pad.position.x))
+              })
+              padsArr.sort((a,b) => {
+                return a - b
+              })
+
+              let holes = [
+                [-672, padsArr[0] - 42],
+                [padsArr[0] + 42, padsArr[1] - 42],
+                [padsArr[1] + 42, padsArr[2] - 42],
+                [padsArr[2] + 42, padsArr[3] - 42],
+                [padsArr[3] + 42, padsArr[4] - 42],
+                [padsArr[4] + 42, 672]
+              ]
+
+              const chickenMinX = chicken.position.x - chickenSize*zoom/2;
+              const chickenMaxX = chicken.position.x + chickenSize*zoom/2;
+              const padLength = {waterpads: 42 * zoom}[lanes[currentLane].type];
+
+              holes.forEach((hole, index) => {
+                const holeMinX = hole[0];
+                const holeMaxX = hole[1];
+                if (chickenMaxX > holeMinX && chickenMinX < holeMaxX) {
+                    localIsDead = true;
+                    setIsDead(true);
+                    chicken.scale.z = 0.2;
+                    cameraSpeed = 0;
+                }
+              });
+            }
+
             if(lanes[currentLane].type === 'river') {
               const chickenMinX = chicken.position.x - chickenSize*zoom/2;
               const chickenMaxX = chicken.position.x + chickenSize*zoom/2;
               
               lanes[currentLane].rafts.forEach(raft => {
-                console.log(raft.geometry.parameters.width)
-
                 const raftMinX = raft.position.x - raft.geometry.parameters.width/2;
                 const raftMaxX = raft.position.x + raft.geometry.parameters.width/2;
                 if(chickenMaxX > raftMinX && chickenMinX < raftMaxX) {
@@ -421,12 +452,6 @@ export default function Game() {
                       setIsDead(true);
                       chicken.scale.x = 0.2;
                     }
-                }
-                // Нужно найти истину
-                if(chickenMaxX < raftMinX || chickenMinX > raftMaxX) {
-                    localIsDead = true;
-                    setIsDead(true);
-                    chicken.position.z = -45;
                 }
               });
             }
