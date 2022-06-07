@@ -149,8 +149,8 @@ export default function Lane(index, zoom, boardWidth, positionWidth, vechicleCol
                 this.mesh.add(raft);
                 return raft;
             });
-
-            this.speed = 2;
+            const riverSpeeds = [1.8, 2, 2.2]
+            this.speed = riverSpeeds[Math.floor(Math.random() * riverSpeeds.length)];
             break;
         }
         case 'waterpads': {

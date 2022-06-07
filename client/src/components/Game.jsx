@@ -150,6 +150,9 @@ export default function Game() {
             while(lanes[lanes.length-1].type === 'waterpads' && lane.type === 'waterpads'){
                 lane = new Lane(index, zoom, boardWidth, positionWidth, vechicleColors, height);
             }
+            if (lanes[lanes.length-1].type === 'river' && lane.type === 'river'){
+                lane.direction = !lanes[lanes.length-1].direction
+            }
             lane.mesh.position.y = index*positionWidth*zoom;
             scene.add(lane.mesh);
             lanes.push(lane);
@@ -422,7 +425,6 @@ export default function Game() {
                 [padsArr[3] + 42, padsArr[4] - 42],
                 [padsArr[4] + 42, 672]
               ]
-              console.log(holes)
 
               const chickenMinX = chicken.position.x - chickenSize*zoom/2;
               const chickenMaxX = chicken.position.x + chickenSize*zoom/2;
@@ -518,9 +520,12 @@ export default function Game() {
               <Score score={score}/>
             </div>
             {isDead === true && restart === false ? (
-                <div className={style.end}>
-                    <Restart restart={restart} setRestart={setRestart}/>
-                </div>
+                <>
+                    <div className={style.backdrop}/>
+                    <div className={style.end}>
+                        <Restart restart={restart} setRestart={setRestart}/>
+                    </div>
+                </>
             ) : null}
         </>
     );
