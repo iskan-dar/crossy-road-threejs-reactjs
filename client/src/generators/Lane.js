@@ -11,7 +11,7 @@ import Train from './Items/Train';
 import Coin from './Items/Coin';
 
 const laneTypes = ['railroad', 'car', 'truck', 'forest', 'river', 'waterpads'];
-const laneSpeeds = [2, 2.5, 3];
+const laneSpeeds = [2.5, 3, 3.5];
 
 export default function Lane(index, zoom, boardWidth, positionWidth, vechicleColors, height) {
     this.index = index;
@@ -135,7 +135,7 @@ export default function Lane(index, zoom, boardWidth, positionWidth, vechicleCol
             this.direction = Math.random() >= 0.5;
 
             const occupiedPositions = new Set();
-            this.rafts = [1, 2, 3].map(() => {
+            this.rafts = [1, 2, 3, 4].map(() => {
                 const raft = new Raft(zoom, positionWidth);
                 let position;
                 do {
@@ -150,7 +150,7 @@ export default function Lane(index, zoom, boardWidth, positionWidth, vechicleCol
                 return raft;
             });
 
-            this.speed = 1.5;
+            this.speed = 2;
             break;
         }
         case 'waterpads': {

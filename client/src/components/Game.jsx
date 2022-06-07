@@ -456,7 +456,8 @@ export default function Game() {
                 [-672, raftsArr[0] - 60],
                 [raftsArr[0] + 60, raftsArr[1] - 60],
                 [raftsArr[1] + 60, raftsArr[2] - 60],
-                [raftsArr[2] + 60, 672],
+                [raftsArr[2] + 60, raftsArr[3] - 60],
+                [raftsArr[3] + 60, 672],
               ];
 
               holes.forEach((hole, index) => {
