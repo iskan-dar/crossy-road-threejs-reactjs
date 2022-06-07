@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 
-//Пока не  доделан!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 export default function Stones(zoom) {
     let dir
     const stonesHeights = [{dir: 'x', value: 15}, {dir: 'y', value: -15}];
@@ -18,7 +17,7 @@ export default function Stones(zoom) {
     dir = stonesHeights[Math.floor(Math.random() * stonesHeights.length)];
 
     const small = new THREE.Mesh(
-        new THREE.BoxBufferGeometry(6 * zoom, 6 * zoom, 8 * zoom),
+        new THREE.BoxBufferGeometry(6 * zoom, 7 * zoom, 12 * zoom),
         new THREE.MeshLambertMaterial({ color: '#6e736e', flatShading: true })
     );
     small.position[dir.dir] = (dir.value)

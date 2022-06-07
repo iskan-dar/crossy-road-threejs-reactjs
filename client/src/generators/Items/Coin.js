@@ -2,6 +2,7 @@ import * as THREE from 'three';
 
 export default function Coin(zoom) {
     const coin = new THREE.Group();
+    coin.name = 'Coin'
 
     const base = new THREE.Mesh(
         new THREE.BoxBufferGeometry(8 * zoom, 14 * zoom, 6 * zoom),

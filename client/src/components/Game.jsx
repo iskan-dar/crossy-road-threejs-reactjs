@@ -8,7 +8,6 @@ import Lane from '../generators/Lane';
 import myReact from '../generators/Texts/myReact';
 import Restart from './Restart/Restart';
 import Score from './Score/Score';
-
 import Billboard from '../generators/Items/Billboard';
 
 export default function Game() {
@@ -53,15 +52,28 @@ export default function Game() {
         const vechicleColors = [0xa52523, 0xbdb638, 0x78b14b, 0x1a5b9c];
         chicken.position.z = -1
 
-        const billboard = new Billboard(zoom, 'Redux', '#B845F2')
+        const billboard = new Billboard(zoom, 'Redux', '#B845F2', -60, 30)
         billboard.position.x = 21 * zoom * 13
         billboard.position.y = 21 * zoom
 
-        const billboard2 = new Billboard(zoom, 'React', '#02B8E1')
-        billboard2.position.x = 21 * zoom * -13
-        billboard2.position.y = 21 * zoom
+        const rectLight = new THREE.PointLight('#0E681B', 1);
+        scene.add( rectLight )
 
-        scene.add(chicken, billboard, billboard2);
+
+
+        const billboard2 = new Billboard(zoom, 'React', '#02B8E1', -60, 30)
+        billboard2.position.x = 21 * zoom * -13
+        billboard2.position.y = (21 * zoom) + (84 * 5)
+
+        const billboard3 = new Billboard(zoom, 'NodeJS', '#0E681B', -70, 30)
+        billboard3.position.x = 21 * zoom * 13
+        billboard3.position.y = (21 * zoom) + (84 * 10)
+
+        const billboard4 = new Billboard(zoom, 'PostgreSQL', '#1E76A7', -80, 22)
+        billboard4.position.x = 21 * zoom * -13
+        billboard4.position.y = (21 * zoom) + (84 * 15)
+
+        scene.add(chicken, billboard, billboard2, billboard3, billboard4);
 
         const hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.6);
         scene.add(hemiLight);
@@ -143,7 +155,6 @@ export default function Game() {
 
         initaliseValues();
 
-
         const addLane = () => {
             const index = lanes.length;
             let lane = new Lane(index, zoom, boardWidth, positionWidth, vechicleColors, height);
@@ -168,22 +179,26 @@ export default function Game() {
 
             if (direction === 'forward') {
               if(lanes[finalPositions.lane+1].type === 'forest' && lanes[finalPositions.lane+1].occupiedPositions.has(finalPositions.column)) return;
+              if(lanes[finalPositions.lane+1].type === 'forest2' && lanes[finalPositions.lane+1].occupiedPositions.has(finalPositions.column)) return;
               if(!stepStartTimestamp) startMoving = true;
               addLane();
             }
             else if (direction === 'backward') {
               if(finalPositions.lane === 0) return;
               if(lanes[finalPositions.lane-1].type === 'forest' && lanes[finalPositions.lane-1].occupiedPositions.has(finalPositions.column)) return;
+              if(lanes[finalPositions.lane-1].type === 'forest2' && lanes[finalPositions.lane-1].occupiedPositions.has(finalPositions.column)) return;
               if(!stepStartTimestamp) startMoving = true;
             }
             else if (direction === 'left') {
               if(finalPositions.column === 0) return;
               if(lanes[finalPositions.lane].type === 'forest' && lanes[finalPositions.lane].occupiedPositions.has(finalPositions.column-1)) return;
+              if(lanes[finalPositions.lane].type === 'forest2' && lanes[finalPositions.lane].occupiedPositions.has(finalPositions.column-1)) return;
               if(!stepStartTimestamp) startMoving = true;
             }
             else if (direction === 'right') {
               if(finalPositions.column === columns - 1 ) return;
               if(lanes[finalPositions.lane].type === 'forest' && lanes[finalPositions.lane].occupiedPositions.has(finalPositions.column+1)) return;
+              if(lanes[finalPositions.lane].type === 'forest2' && lanes[finalPositions.lane].occupiedPositions.has(finalPositions.column+1)) return;
               if(!stepStartTimestamp) startMoving = true;
             }
             moves.push(direction);
@@ -408,6 +423,44 @@ export default function Game() {
               });
             }
 
+            if(lanes[currentLane].type === 'forest') {
+              const chickenMinX = chicken.position.x - chickenSize*zoom/2;
+              const chickenMaxX = chicken.position.x + chickenSize*zoom/2;
+              let coin
+              let coinMinX
+              let coinMaxX
+
+                if (lanes[currentLane].mesh.children[9]) {
+                coin = lanes[currentLane].mesh.children[9]
+                coinMinX = coin.position.x - 42
+                coinMaxX = coin.position.x + 42
+              }
+                if (chickenMaxX > coinMinX && chickenMinX < coinMaxX && coin !== undefined) {
+                  coin.position.z = -30
+                  coin.position.x = 2000
+                  setScore((prev) => prev + 3)
+            }
+          }
+
+          if(lanes[currentLane].type === 'forest2') {
+            const chickenMinX = chicken.position.x - chickenSize*zoom/2;
+            const chickenMaxX = chicken.position.x + chickenSize*zoom/2;
+            let coin
+            let coinMinX
+            let coinMaxX
+
+              if (lanes[currentLane].mesh.children[6]) {
+              coin = lanes[currentLane].mesh.children[6]
+              coinMinX = coin.position.x - 42
+              coinMaxX = coin.position.x + 42
+            }
+              if (chickenMaxX > coinMinX && chickenMinX < coinMaxX && coin !== undefined) {
+              coin.position.z = -30
+              coin.position.x = 2000
+              setScore((prev) => prev + 3)
+          }
+        }
+
             if(lanes[currentLane].type === 'waterpads') {
               const padsArr = []
               lanes[currentLane].pads.forEach(pad => {
@@ -435,7 +488,7 @@ export default function Game() {
                 if (chickenMaxX > holeMinX && chickenMinX < holeMaxX && holeMaxX !== holeMinX) {
                     localIsDead = true;
                     setIsDead(true);
-                    chicken.scale.z = 0.2;
+                    chicken.position.z = -50;
                     cameraSpeed = 0;
                 }
               });
@@ -468,7 +521,7 @@ export default function Game() {
                 if (chickenMaxX > holeMinX && chickenMinX < holeMaxX) {
                     localIsDead = true;
                     setIsDead(true);
-                    chicken.scale.z = 0.2;
+                    chicken.position.z = -50;
                     cameraSpeed = 0;
                 }
               });

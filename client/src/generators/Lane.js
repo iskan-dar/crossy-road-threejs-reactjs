@@ -1,4 +1,5 @@
 import Grass from './Ground/Grass';
+import Grass2 from './Ground/Grass2';
 import Road from './Ground/Road';
 import Water from './Ground/Water';
 import Car from './Items/Car';
@@ -9,8 +10,9 @@ import Pad from './Items/Pad';
 import Rails from './Ground/Rails';
 import Train from './Items/Train';
 import Coin from './Items/Coin';
+import Stones from './Items/Stones';
 
-const laneTypes = ['railroad', 'car', 'truck', 'forest', 'river', 'waterpads'];
+const laneTypes = ['railroad', 'car', 'truck', 'forest', 'forest2', 'river', 'waterpads'];
 const laneSpeeds = [2.5, 3, 3.5];
 
 export default function Lane(index, zoom, boardWidth, positionWidth, vechicleColors, height) {
@@ -82,6 +84,42 @@ export default function Lane(index, zoom, boardWidth, positionWidth, vechicleCol
 
             break;
         }
+
+        case 'forest2': {
+            this.mesh = new Grass2(zoom, boardWidth, positionWidth);
+
+            this.occupiedPositions = new Set();
+            this.stones = [1, 2, 3].map(() => {
+                const stone = new Stones(zoom);
+                stone.scale.x = 1.7
+                stone.scale.y = 1.7
+                stone.scale.z = 0.8
+                let position;
+                do {
+                    position = Math.floor(Math.random() * boardWidth/positionWidth);
+                } while (this.occupiedPositions.has(position));
+                this.occupiedPositions.add(position);
+                stone.position.x =
+                    (position * positionWidth + positionWidth / 2) * zoom -
+                    (boardWidth * zoom) / 2;
+                this.mesh.add(stone);
+                return stone;
+            });
+
+            const coin = new Coin(zoom)
+            let coinPosition;
+            coinPosition = Math.floor(Math.random() * boardWidth/positionWidth);
+            let rand = Math.floor(1 + Math.random() * (5 + 1 - 1));
+
+            if (rand > 2) {
+                coin.position.x = (coinPosition * positionWidth + positionWidth / 2) * zoom -
+                (boardWidth * zoom) / 2;
+                this.mesh.add(coin)
+            }
+
+            break;
+        }
+        
         case 'car': {
             this.mesh = new Road(zoom, boardWidth, positionWidth);
             this.direction = Math.random() >= 0.5;
