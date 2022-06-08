@@ -338,42 +338,28 @@ export default function Game() {
               if (lane.type === 'railroad') {
                 const aBitBeforeTheBeginingOfLane = -boardWidth*zoom/0.1 - positionWidth*2*zoom;
                 const aBitAfterTheEndOFLane = boardWidth*zoom/0.1 + positionWidth*2*zoom;
+                const greenSignal = new THREE.Color('rgb(0, 255, 0)');
+                const redSignal = new THREE.Color('rgb(255, 0, 0)');
 
                 lane.trains.forEach(train => {
                     if(lane.direction) {
-                        // console.log('слева на право', train.position.x)
                         train.position.x = train.position.x < aBitBeforeTheBeginingOfLane ? aBitAfterTheEndOFLane : train.position.x -= lane.speed/0.7*delta;
-                        if(train.position.x < 4142 && train.position.x < -2142){
-                            lane.mesh.children[39].children[10].material.color.r = 0
-                            lane.mesh.children[39].children[10].material.color.g = 255
-                            lane.mesh.children[39].children[10].material.color.b = 0
-                            lane.mesh.children[39].children[11].material.color.r = 0
-                            lane.mesh.children[39].children[11].material.color.g = 255
-                            lane.mesh.children[39].children[11].material.color.b = 0
+                        if(train.position.x < 4142 && train.position.x > -2142){
+                            lane.mesh.children[39].children[10].material.color = redSignal;
+                            lane.mesh.children[39].children[11].material.color = redSignal;
                         }else{
-                            lane.mesh.children[39].children[10].material.color.r = 255
-                            lane.mesh.children[39].children[10].material.color.g = 0
-                            lane.mesh.children[39].children[10].material.color.b = 0
-                            lane.mesh.children[39].children[11].material.color.r = 255
-                            lane.mesh.children[39].children[11].material.color.g = 0
-                            lane.mesh.children[39].children[11].material.color.b = 0
+                            lane.mesh.children[39].children[10].material.color = greenSignal;
+                            lane.mesh.children[39].children[11].material.color = greenSignal;
+
                         }
                     }else{
                         train.position.x = train.position.x > aBitAfterTheEndOFLane ? aBitBeforeTheBeginingOfLane : train.position.x += lane.speed/0.7*delta;
-                        if(train.position.x > -4142 && train.position.x < 2142){
-                            lane.mesh.children[39].children[10].material.color.r = 255
-                            lane.mesh.children[39].children[10].material.color.g = 0
-                            lane.mesh.children[39].children[10].material.color.b = 0
-                            lane.mesh.children[39].children[11].material.color.r = 255
-                            lane.mesh.children[39].children[11].material.color.g = 0
-                            lane.mesh.children[39].children[11].material.color.b = 0
-                        }else{
-                            lane.mesh.children[39].children[10].material.color.r = 0
-                            lane.mesh.children[39].children[10].material.color.g = 255
-                            lane.mesh.children[39].children[10].material.color.b = 0
-                            lane.mesh.children[39].children[11].material.color.r = 0
-                            lane.mesh.children[39].children[11].material.color.g = 255
-                            lane.mesh.children[39].children[11].material.color.b = 0
+                        if (train.position.x > -4142 && train.position.x < 2142){
+                          lane.mesh.children[39].children[10].material.color = redSignal;
+                          lane.mesh.children[39].children[11].material.color = redSignal;
+                        }else {
+                            lane.mesh.children[39].children[10].material.color = greenSignal;
+                            lane.mesh.children[39].children[11].material.color = greenSignal;
                         }
                     }
 
