@@ -1,0 +1,13 @@
+.mainBox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%, -50%);
+    background-color: rgb(16, 150, 184);
+    border-radius: 16px;
+}
+
+.textBox {
+    padding: 30px;
+    color: #ffffff;
+}

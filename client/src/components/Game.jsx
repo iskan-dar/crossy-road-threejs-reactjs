@@ -8,6 +8,7 @@ import Lane from '../generators/Lane';
 import myReact from '../generators/Texts/myReact';
 import Restart from './Restart/Restart';
 import Score from './Score/Score';
+import About from './About/About';
 import Billboard from '../generators/Items/Billboard';
 
 export default function Game() {
@@ -15,6 +16,7 @@ export default function Game() {
     const [isDead, setIsDead] = useState(false);
     const [restart, setRestart] = useState(false);
     const [score, setScore] = useState(0)
+    const [about, setAbout] = useState(false)
     let localIsDead = false;
     let lanes;
     const scene = new THREE.Scene();
@@ -46,6 +48,35 @@ export default function Game() {
       10000
   );
 
+  function soundClick() {
+    var audio = new Audio();
+    audio.src = '/sounds/2j.wav';
+    audio.volume = 0.8
+    audio.autoplay = true;
+  }
+
+  function coinAudio() {
+    const audio = new Audio()
+    audio.src = '/sounds/coin.wav'
+    audio.volume = 0.4
+    audio.autoplay = true;
+  }
+
+  function loseAudio() {
+    const audio = new Audio()
+    audio.src = '/sounds/lose.wav'
+    audio.volume = 0.4
+    audio.autoplay = true;
+  }
+
+  if (isDead) {
+    loseAudio()
+  }
+
+  function aboutHandler() {
+    setAbout(!about)
+  }
+
     useEffect(() => {
         scene.background = new THREE.Color('#141517');
 
@@ -55,11 +86,6 @@ export default function Game() {
         const billboard = new Billboard(zoom, 'Redux', '#B845F2', -60, 30)
         billboard.position.x = 21 * zoom * 13
         billboard.position.y = 21 * zoom
-
-        const rectLight = new THREE.PointLight('#0E681B', 1);
-        scene.add( rectLight )
-
-
 
         const billboard2 = new Billboard(zoom, 'React', '#02B8E1', -60, 30)
         billboard2.position.x = 21 * zoom * -13
@@ -73,7 +99,11 @@ export default function Game() {
         billboard4.position.x = 21 * zoom * -13
         billboard4.position.y = (21 * zoom) + (84 * 15)
 
-        scene.add(chicken, billboard, billboard2, billboard3, billboard4);
+        const billboard5 = new Billboard(zoom, 'ThreeJS', '#353535', -70, 27)
+        billboard5.position.x = 21 * zoom * 13
+        billboard5.position.y = (21 * zoom) + (84 * 20)
+
+        scene.add(chicken, billboard, billboard2, billboard3, billboard4, billboard5);
 
         const hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.6);
         scene.add(hemiLight);
@@ -235,22 +265,26 @@ export default function Game() {
             if (event.keyCode == '38' && localIsDead === false) {
               chicken.scale.z = 1
               move('forward')
+              soundClick()
               cameraSpeed += 0.01;
               setScore(currentLane + 1)
             }
             else if (event.keyCode == '40' && localIsDead === false) {
               // down arrow
               chicken.scale.z = 1
+              soundClick()
               move('backward')
             }
             else if (event.keyCode == '37' && localIsDead === false) {
               // left arrow
               chicken.scale.z = 1
+              soundClick()
               move('left')
             }
             else if (event.keyCode == '39' && localIsDead === false) {
               // right arrow
               chicken.scale.z = 1
+              soundClick()
               move('right')
             }
           });
@@ -438,6 +472,7 @@ export default function Game() {
                 if (chickenMaxX > coinMinX && chickenMinX < coinMaxX && coin !== undefined) {
                   coin.position.z = -30
                   coin.position.x = 2000
+                  coinAudio()
                   setScore((prev) => prev + 3)
             }
           }
@@ -457,6 +492,7 @@ export default function Game() {
               if (chickenMaxX > coinMinX && chickenMinX < coinMaxX && coin !== undefined) {
               coin.position.z = -30
               coin.position.x = 2000
+              coinAudio()
               setScore((prev) => prev + 3)
           }
         }
@@ -572,6 +608,9 @@ export default function Game() {
             <div className={style.scoreBox}>
               <Score score={score}/>
             </div>
+            <div className={style.aboutButtonBox}>
+              <button className={style.aboutBtn} onClick={aboutHandler}>About me</button>
+            </div>
             {isDead === true && restart === false ? (
                 <>
                     <div className={style.backdrop}/>
@@ -580,6 +619,16 @@ export default function Game() {
                     </div>
                 </>
             ) : null}
+            {
+              about === true ? 
+              (
+                <>
+                  <About/>
+                </>
+              ) : (
+                null
+              )
+            }
         </>
     );
 }

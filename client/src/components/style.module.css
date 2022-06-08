@@ -4,8 +4,9 @@
 
 .end {
     position: absolute;
-    top: 70%;
-    left: 35%;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%, -50%);
     width: 400px;
     height: 200px;
     display: flex;
@@ -32,3 +33,16 @@
     z-index: 10;
     background: rgba(246, 242, 242, 0.533);
   }
+
+.aboutButtonBox {
+  position: absolute;
+  left: 90%;
+  top: 15%;
+}
+
+.aboutBtn {
+  background-color: #07a9e9;
+  border-radius: 12px;
+  border: none;
+  padding: 10px;
+}
