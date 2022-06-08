@@ -16,14 +16,17 @@ export default function Rails(zoom, boardWidth, positionWidth) {
   const middle = createSection(0x454a59);
   middle.receiveShadow = true;
   rails.add(middle);
+  middle.name = 'middleSection';
 
   const left = createSection(0x393d49);
   left.position.x = -boardWidth * zoom;
   rails.add(left);
+  left.name = 'leftSection';
 
   const right = createSection(0x393d49);
   right.position.x = boardWidth * zoom;
   rails.add(right);
+  right.name = 'rightSection';
 
   const rightRail = new THREE.Mesh(
     new THREE.BoxBufferGeometry(boardWidth * 3 * zoom, 5 * zoom, 3 * zoom),

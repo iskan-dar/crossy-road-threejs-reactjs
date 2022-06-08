@@ -199,6 +199,8 @@ export default function Game() {
             lanes.push(lane);
           }
 
+          console.log(lanes, -1428-714, 1428+714)
+
           function move(direction) {
             const finalPositions = moves.reduce((position,move) => {
               if(move === 'forward') return {lane: position.lane + 1, column: position.column};
@@ -336,12 +338,45 @@ export default function Game() {
               if (lane.type === 'railroad') {
                 const aBitBeforeTheBeginingOfLane = -boardWidth*zoom/0.1 - positionWidth*2*zoom;
                 const aBitAfterTheEndOFLane = boardWidth*zoom/0.1 + positionWidth*2*zoom;
+
                 lane.trains.forEach(train => {
-                  if(lane.direction) {
-                    train.position.x = train.position.x < aBitBeforeTheBeginingOfLane ? aBitAfterTheEndOFLane : train.position.x -= lane.speed/0.7*delta;
-                  }else{
-                    train.position.x = train.position.x > aBitAfterTheEndOFLane ? aBitBeforeTheBeginingOfLane : train.position.x += lane.speed/0.7*delta;
-                  }
+                    if(lane.direction) {
+                        // console.log('слева на право', train.position.x)
+                        train.position.x = train.position.x < aBitBeforeTheBeginingOfLane ? aBitAfterTheEndOFLane : train.position.x -= lane.speed/0.7*delta;
+                        if(train.position.x < 4142 && train.position.x < -2142){
+                            lane.mesh.children[39].children[10].material.color.r = 0
+                            lane.mesh.children[39].children[10].material.color.g = 255
+                            lane.mesh.children[39].children[10].material.color.b = 0
+                            lane.mesh.children[39].children[11].material.color.r = 0
+                            lane.mesh.children[39].children[11].material.color.g = 255
+                            lane.mesh.children[39].children[11].material.color.b = 0
+                        }else{
+                            lane.mesh.children[39].children[10].material.color.r = 255
+                            lane.mesh.children[39].children[10].material.color.g = 0
+                            lane.mesh.children[39].children[10].material.color.b = 0
+                            lane.mesh.children[39].children[11].material.color.r = 255
+                            lane.mesh.children[39].children[11].material.color.g = 0
+                            lane.mesh.children[39].children[11].material.color.b = 0
+                        }
+                    }else{
+                        train.position.x = train.position.x > aBitAfterTheEndOFLane ? aBitBeforeTheBeginingOfLane : train.position.x += lane.speed/0.7*delta;
+                        if(train.position.x > -4142 && train.position.x < 2142){
+                            lane.mesh.children[39].children[10].material.color.r = 255
+                            lane.mesh.children[39].children[10].material.color.g = 0
+                            lane.mesh.children[39].children[10].material.color.b = 0
+                            lane.mesh.children[39].children[11].material.color.r = 255
+                            lane.mesh.children[39].children[11].material.color.g = 0
+                            lane.mesh.children[39].children[11].material.color.b = 0
+                        }else{
+                            lane.mesh.children[39].children[10].material.color.r = 0
+                            lane.mesh.children[39].children[10].material.color.g = 255
+                            lane.mesh.children[39].children[10].material.color.b = 0
+                            lane.mesh.children[39].children[11].material.color.r = 0
+                            lane.mesh.children[39].children[11].material.color.g = 255
+                            lane.mesh.children[39].children[11].material.color.b = 0
+                        }
+                    }
+
                 });
               }
 
@@ -620,7 +655,7 @@ export default function Game() {
                 </>
             ) : null}
             {
-              about === true ? 
+              about === true ?
               (
                 <>
                   <About/>
