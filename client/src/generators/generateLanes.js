@@ -18,7 +18,7 @@ const generateLanes = (
                 vechicleColors,
                 height
             );
-            while(lane.type === 'waterpads'){
+            while(lane.type === 'waterpads' || lane.type === 'river'){
                 lane = new Lane(
                     index,
                     zoom,
