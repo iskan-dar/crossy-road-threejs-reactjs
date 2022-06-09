@@ -27,7 +27,7 @@ export default function Road(zoom, boardWidth, positionWidth) {
     for (let i = 0; i < 12; i++) {
         const whiteStripe = new THREE.Mesh(
             new THREE.BoxBufferGeometry(20 * zoom, 5 * zoom, 1 * zoom),
-            new THREE.MeshLambertMaterial({ color: '#ffffff', flatShading: true })
+            new THREE.MeshLambertMaterial({ color: '#98A1B8', flatShading: true })
         );
         whiteStripe.position.z = 1 * zoom;
         whiteStripe.position.x = -660 + (i * 60) * zoom;

@@ -1,0 +1,9 @@
+.restartBtn {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 26px;
+    padding: 16px;
+    background-color: #8f1a05;
+    border-radius: 16px;
+    color: #ffffff;
+    border: none;
+}
