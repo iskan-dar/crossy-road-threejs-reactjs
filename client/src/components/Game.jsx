@@ -50,21 +50,21 @@ export default function Game() {
 
   function soundClick() {
     var audio = new Audio();
-    audio.src = '/sounds/2j.wav';
+    audio.src = './sounds/2j.wav';
     audio.volume = 0.8
     audio.autoplay = true;
   }
 
   function coinAudio() {
     const audio = new Audio()
-    audio.src = '/sounds/coin.wav'
+    audio.src = './sounds/coin.wav'
     audio.volume = 0.4
     audio.autoplay = true;
   }
 
   function loseAudio() {
     const audio = new Audio()
-    audio.src = '/sounds/lose.wav'
+    audio.src = './sounds/lose.wav'
     audio.volume = 0.4
     audio.autoplay = true;
   }
