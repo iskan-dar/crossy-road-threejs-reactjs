@@ -1,5 +1,7 @@
 .mainBox {
     position: absolute;
+    display: flex;
+    flex-direction: column;
     top: 50%;
     left: 50%;
     transform:translate(-50%, -50%);
@@ -8,6 +10,37 @@
 }
 
 .textBox {
-    padding: 30px;
+    padding: 30px 30px 0px 30px;
     color: #ffffff;
+}
+
+.textBox p {
+    font-size: 20px;
+}
+
+.stackBox {
+    display: flex ;
+    padding: 0px 30px;
+}
+
+.iconBackground {
+    width: 100px;
+    height: 100px;
+    background-color: #ffffff;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px;
+}
+
+.projectBox {
+    color: #ffffff;
+    padding: 0px 30px 50px 30px;
+}
+
+.closeBtn {
+    position: absolute;
+    left: 92%;
+    top: 10px;
 }
