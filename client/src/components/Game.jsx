@@ -3,6 +3,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import style from './style.module.css';
 import * as THREE from 'three';
 import Chicken from '../generators/Chicken';
+import Chick from '../generators/Chicken copy';
 import generateLanes from '../generators/generateLanes';
 import Lane from '../generators/Lane';
 import myReact from '../generators/Texts/myReact';
@@ -23,7 +24,7 @@ export default function Game() {
     const zoom = 2;
     let chickenSize = 12;
     let moves;
-    const chicken = new Chicken(zoom)
+    let chicken = new Chicken(zoom)
     const distance = 500;
     let height;
     let cameraSpeed = 0.5;
@@ -51,57 +52,57 @@ export default function Game() {
   function soundClick() {
     var audio = new Audio();
     audio.src = './sounds/2j.wav';
-    audio.volume = 0.8
+    audio.volume = 0.1;
     audio.autoplay = true;
   }
 
   function coinAudio() {
-    const audio = new Audio()
+    const audio = new Audio();
     audio.src = './sounds/coin.wav'
-    audio.volume = 0.4
+    audio.volume = 0.1
     audio.autoplay = true;
   }
 
   function loseAudio() {
-    const audio = new Audio()
-    audio.src = './sounds/lose.wav'
-    audio.volume = 0.4
+    const audio = new Audio();
+    audio.src = './sounds/lose.wav';
+    audio.volume = 0.1;
     audio.autoplay = true;
   }
 
   if (isDead) {
-    loseAudio()
+    loseAudio();
   }
 
   function aboutHandler() {
-    setAbout(!about)
+    setAbout(!about);
   }
 
     useEffect(() => {
         scene.background = new THREE.Color('#141517');
 
         const vechicleColors = [0xa52523, 0xbdb638, 0x78b14b, 0x1a5b9c];
-        chicken.position.z = -1
+        chicken.position.z = -1;
 
         const billboard = new Billboard(zoom, 'Redux', '#B845F2', -60, 30)
-        billboard.position.x = 21 * zoom * 9
-        billboard.position.y = 21 * zoom
+        billboard.position.x = 21 * zoom * 9;
+        billboard.position.y = 21 * zoom;
 
         const billboard2 = new Billboard(zoom, 'React', '#02B8E1', -60, 30)
-        billboard2.position.x = 21 * zoom * -9
-        billboard2.position.y = (21 * zoom) + (84 * 5)
+        billboard2.position.x = 21 * zoom * -9;
+        billboard2.position.y = (21 * zoom) + (84 * 5);
 
-        const billboard3 = new Billboard(zoom, 'NodeJS', '#0E681B', -70, 30)
-        billboard3.position.x = 21 * zoom * 9
-        billboard3.position.y = (21 * zoom) + (84 * 10)
+        const billboard3 = new Billboard(zoom, 'NodeJS', '#0E681B', -70, 30);
+        billboard3.position.x = 21 * zoom * 9;
+        billboard3.position.y = (21 * zoom) + (84 * 10);
 
-        const billboard4 = new Billboard(zoom, 'PostgreSQL', '#1E76A7', -80, 22)
-        billboard4.position.x = 21 * zoom * -9
-        billboard4.position.y = (21 * zoom) + (84 * 15)
+        const billboard4 = new Billboard(zoom, 'PostgreSQL', '#1E76A7', -80, 22);
+        billboard4.position.x = 21 * zoom * -9;
+        billboard4.position.y = (21 * zoom) + (84 * 15);
 
-        const billboard5 = new Billboard(zoom, 'ThreeJS', '#353535', -70, 27)
-        billboard5.position.x = 21 * zoom * 9
-        billboard5.position.y = (21 * zoom) + (84 * 20)
+        const billboard5 = new Billboard(zoom, 'ThreeJS', '#353535', -70, 27);
+        billboard5.position.x = 21 * zoom * 9;
+        billboard5.position.y = (21 * zoom) + (84 * 20);
 
         scene.add(chicken, billboard, billboard2, billboard3, billboard4, billboard5);
 

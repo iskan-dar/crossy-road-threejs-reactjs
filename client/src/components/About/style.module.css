@@ -9,6 +9,10 @@
     border-radius: 16px;
 }
 
+.background {
+    opacity: 0.4;
+}
+
 .textBox {
     padding: 30px 30px 0px 30px;
     color: #ffffff;

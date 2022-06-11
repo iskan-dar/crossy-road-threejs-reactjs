@@ -1,5 +1,6 @@
 import React, {useRef} from 'react';
 import style from './style.module.css';
+import img1 from '../../../public/'
 
 export default function About({setAbout, about}) {
 
@@ -9,18 +10,22 @@ export default function About({setAbout, about}) {
   
     return (
         <div className={style.mainBox}>
+            <div className={style.background}>
+                <img src='/123.png'/>
+            </div>
             <div className={style.textBox}>
                 <p>Hello! My name is ...enter name</p>
                 <p>Im a frontend developer</p>
                 <p>My stack: React, Redux, PostgreSQL, NodeJS, THREE JS, Sequelize, Socket.IO</p>
                 <div onClick={closeHandler} className={style.closeBtn}>
-                  <img src='./x-circle.svg'/>
+                  <img src='/x-circle.svg'/>
                 </div>
+                <div className={style.iconBackground }>
+                <a href="https://t.me/antonatnagulov">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/512px-Telegram_logo.svg.png" alt="Telegram" width="50px"/>
+                </a>
             </div>
-
-            <div>
-
-            </div>
+        </div>
 
             <div className={style.stackBox}>
                 <div className={style.iconBackground}>
@@ -94,11 +99,11 @@ export default function About({setAbout, about}) {
               <p>Stock for 3d models with preview 3d models</p>
               <a href=''>Unicorn 3d stock</a>
               <p>Site for online play role-play games with rooms, videochat and map builder</p>
-              <a href=''>Dungeon Online</a>
+              <a href='https://dnd-deploy.herokuapp.com/'>Dungeon Online</a>
               <p>Mobile simple counter for board games on React Native</p>
               <a href=''>Simple MTG counter</a>
-              <p>Anime opening finder on Legacy stack</p>
-              <a href=''>Anime OP Finder</a>
+              <p>Anime episode finder on Legacy stack</p>
+              <a href='https://anime-ep-finder.herokuapp.com/'>Anime EP Finder</a>
             </div>
         </div>
     );
