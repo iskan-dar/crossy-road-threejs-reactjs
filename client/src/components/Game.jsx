@@ -146,12 +146,12 @@ export default function Game() {
         camera.position.x = initialCameraPositionX;
         camera.position.z = distance;
 
-        const text = new myReact('Hi, my name is {enter name}')
+        const text = new myReact('Hi, my name is Iskandar')
         text.position.z = 2
         text.position.x = (-boardWidth/2) * zoom + 100
         text.position.y = -200
 
-        const text2 = new myReact('I am a frontend developer')
+        const text2 = new myReact("I'm a frontend developer")
         text2.position.z = 2
         text2.position.x = (-boardWidth/2) * zoom + 400
         text2.position.y = -350

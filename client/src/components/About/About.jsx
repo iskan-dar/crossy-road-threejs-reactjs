@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import style from './style.module.css';
 
 export default function About({ setAbout, about }) {
@@ -10,8 +10,8 @@ export default function About({ setAbout, about }) {
         <div className={style.mainBox}>
             <div className={style.contentBox}>
                 <div className={style.textBox}>
-                    <p>Hello! My name is ...enter name</p>
-                    <p>Im a frontend developer</p>
+                    <p>Hello! My name is Iskandar</p>
+                    <p>I'm a frontend developer</p>
                     <p>
                         My stack: React, Redux, PostgreSQL, NodeJS, THREE JS,
                         Sequelize, Socket.IO
@@ -19,11 +19,15 @@ export default function About({ setAbout, about }) {
                     <div onClick={closeHandler} className={style.closeBtn}>
                         <img src="./x-circle.svg" />
                     </div>
-                    {/* <div className={style.iconBackground }>
-                <a href="https://t.me/antonatnagulov">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/512px-Telegram_logo.svg.png" alt="Telegram" width="50px"/>
-                </a>
-            </div> */}
+                    {/* <div className={style.iconBackground}>
+                        <a href="https://t.me/iskandaru">
+                            <img
+                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/512px-Telegram_logo.svg.png"
+                                alt="Telegram"
+                                width="50px"
+                            />
+                        </a>
+                    </div> */}
                 </div>
 
                 <div className={style.stackBox}>
@@ -101,15 +105,6 @@ export default function About({ setAbout, about }) {
                         Site for online play role-play games with rooms,
                         videochat and map builder
                     </p>
-                    <a href="https://dnd-deploy.herokuapp.com/">
-                        Dungeon Online
-                    </a>
-                    <p>Mobile simple counter for board games on React Native</p>
-                    <a href="">Simple MTG counter</a>
-                    <p>Anime episode finder on Legacy stack</p>
-                    <a href="https://anime-ep-finder.herokuapp.com/">
-                        Anime EP Finder
-                    </a>
                 </div>
             </div>
         </div>
