@@ -3,7 +3,6 @@ import React, { useRef, useEffect, useState } from 'react';
 import style from './style.module.css';
 import * as THREE from 'three';
 import Chicken from '../generators/Chicken';
-import Chick from '../generators/Chicken copy';
 import generateLanes from '../generators/generateLanes';
 import Lane from '../generators/Lane';
 import myReact from '../generators/Texts/myReact';
@@ -85,26 +84,30 @@ export default function Game() {
         chicken.position.z = -1;
 
         const billboard = new Billboard(zoom, 'Redux', '#B845F2', -60, 30)
-        billboard.position.x = 21 * zoom * 9;
+        billboard.position.x = 21 * zoom * 7;
         billboard.position.y = 21 * zoom;
 
         const billboard2 = new Billboard(zoom, 'React', '#02B8E1', -60, 30)
-        billboard2.position.x = 21 * zoom * -9;
+        billboard2.position.x = 21 * zoom * -7;
         billboard2.position.y = (21 * zoom) + (84 * 5);
 
-        const billboard3 = new Billboard(zoom, 'NodeJS', '#0E681B', -70, 30);
-        billboard3.position.x = 21 * zoom * 9;
+        const billboard3 = new Billboard(zoom, 'NodeJS', '#32c914', -70, 30);
+        billboard3.position.x = 21 * zoom * 7;
         billboard3.position.y = (21 * zoom) + (84 * 10);
 
         const billboard4 = new Billboard(zoom, 'PostgreSQL', '#1E76A7', -80, 22);
-        billboard4.position.x = 21 * zoom * -9;
+        billboard4.position.x = 21 * zoom * -7;
         billboard4.position.y = (21 * zoom) + (84 * 15);
 
         const billboard5 = new Billboard(zoom, 'ThreeJS', '#353535', -70, 27);
-        billboard5.position.x = 21 * zoom * 9;
+        billboard5.position.x = 21 * zoom * 7;
         billboard5.position.y = (21 * zoom) + (84 * 20);
 
-        scene.add(chicken, billboard, billboard2, billboard3, billboard4, billboard5);
+        const billboard6 = new Billboard(zoom, 'Express', '#777877', -60, 25);
+        billboard6.position.x = 21 * zoom * -7;
+        billboard6.position.y = (21 * zoom) + (84 * 25);
+
+        scene.add(chicken, billboard, billboard2, billboard3, billboard4, billboard5, billboard6);
 
         const hemiLight = new THREE.HemisphereLight(0xffffff, 0xffffff, 0.6);
         scene.add(hemiLight);
@@ -148,17 +151,17 @@ export default function Game() {
 
         const text = new myReact('Hi, my name is Iskandar')
         text.position.z = 2
-        text.position.x = (-boardWidth/2) * zoom + 100
+        text.position.x = (-boardWidth/2) * zoom + 70
         text.position.y = -200
 
-        const text2 = new myReact("I'm a frontend developer")
+        const text2 = new myReact("I'm a full stack js developer")
         text2.position.z = 2
-        text2.position.x = (-boardWidth/2) * zoom + 400
+        text2.position.x = (-boardWidth/2) * zoom + 300
         text2.position.y = -350
 
-        const text3 = new myReact('Jump ahead to see my stack')
+        const text3 = new myReact('Move forward and discover my stack')
         text3.position.z = 2
-        text3.position.x = (-boardWidth/2) * zoom + 100
+        text3.position.x = (-boardWidth/2) * zoom + 70
         text3.position.y = -500
 
         scene.add(text, text2, text3)

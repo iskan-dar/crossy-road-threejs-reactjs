@@ -10,24 +10,55 @@ export default function About({ setAbout, about }) {
         <div className={style.mainBox}>
             <div className={style.contentBox}>
                 <div className={style.textBox}>
-                    <p>Hello! My name is Iskandar</p>
-                    <p>I'm a frontend developer</p>
-                    <p>
-                        My stack: React, Redux, PostgreSQL, NodeJS, THREE JS,
-                        Sequelize, Socket.IO
-                    </p>
+                    <h3>Hello! My name is Iskandar</h3>
+                    <p>I'm a Full Stack JS developer</p>
                     <div onClick={closeHandler} className={style.closeBtn}>
                         <img src="./x-circle.svg" />
                     </div>
-                    {/* <div className={style.iconBackground}>
-                        <a href="https://t.me/iskandaru">
-                            <img
-                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/512px-Telegram_logo.svg.png"
-                                alt="Telegram"
-                                width="50px"
-                            />
-                        </a>
-                    </div> */}
+                    <div className={style.contactsBox}>
+                        <p align="left">
+                            <a
+                                className={style.contactsBtn}
+                                target="_blank"
+                                href="https://github.com/iskan-dar/"
+                                rel="noreferrer"
+                            >
+                                <img src="https://img.shields.io/badge/my_github-black?logo=github&logoColor=white&style=for-the-badge" />
+                            </a>
+                            &nbsp;&nbsp;&nbsp;
+                            <a
+                                className={style.contactsBtn}
+                                target="_blank"
+                                href="https://wa.me/46720358488"
+                                rel="noreferrer"
+                            >
+                                <img src="https://img.shields.io/badge/my_whatsapp-darkgreen?logo=whatsapp&logoColor=white&style=for-the-badge" />
+                            </a>
+                            &nbsp;&nbsp;&nbsp;
+                            <a
+                                className={style.contactsBtn}
+                                target="_blank"
+                                href="https://t.me/iskandaru"
+                                rel="noreferrer"
+                            >
+                                <img src="https://img.shields.io/badge/my_telegram-white?logo=telegram&logoColor=white&style=for-the-badge" />
+                            </a>
+                            &nbsp;&nbsp;&nbsp;
+                            <a
+                                className={style.contactsBtn}
+                                target="_blank"
+                                href="mailto:iskandar.umarov@hotmail.com"
+                                rel="noreferrer"
+                            >
+                                <img src="https://img.shields.io/badge/my_email-blue?logo=gmail&logoColor=white&style=for-the-badge" />
+                            </a>
+                            &nbsp;&nbsp;&nbsp;
+                        </p>
+                    </div>
+                    <p>
+                        My stack: React, Redux, NodeJS, Express, PostgreSQL, THREE JS,
+                        Socket.IO
+                    </p>
                 </div>
 
                 <div className={style.stackBox}>
@@ -51,18 +82,27 @@ export default function About({ setAbout, about }) {
                     </div>
                     <div className={style.iconBackground}>
                         <img
-                            src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/postgresql/postgresql-original-wordmark.svg"
-                            title="Material UI"
-                            alt="Material UI"
+                            src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/nodejs/nodejs-original-wordmark.svg"
+                            title="NodeJS"
+                            alt="NodeJS"
                             width="70"
                             height="70"
                         />
                     </div>
                     <div className={style.iconBackground}>
                         <img
-                            src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/nodejs/nodejs-original-wordmark.svg"
-                            title="CSS3"
-                            alt="CSS"
+                            src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/express/express-original-wordmark.svg"
+                            title="Express"
+                            alt="Express"
+                            width="70"
+                            height="70"
+                        />
+                    </div>
+                    <div className={style.iconBackground}>
+                        <img
+                            src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/postgresql/postgresql-original-wordmark.svg"
+                            title="PostgreSQL"
+                            alt="PostgreSQL"
                             width="70"
                             height="70"
                         />
@@ -78,18 +118,9 @@ export default function About({ setAbout, about }) {
                     </div>
                     <div className={style.iconBackground}>
                         <img
-                            src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/sequelize/sequelize-original-wordmark.svg"
-                            title="HTML5"
-                            alt="HTML"
-                            width="70"
-                            height="70"
-                        />
-                    </div>
-                    <div className={style.iconBackground}>
-                        <img
                             src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/socketio/socketio-original-wordmark.svg"
-                            title="JavaScript"
-                            alt="JavaScript"
+                            title="Socket.io"
+                            alt="Socket.io"
                             width="70"
                             height="70"
                         />
@@ -97,14 +128,18 @@ export default function About({ setAbout, about }) {
                 </div>
                 <div className={style.projectBox}>
                     <h3>My projects</h3>
-                    <p>THREE JS landing with GLTF models</p>
-                    <a href="">Sci-Fi Weapons</a>
-                    <p>Stock for 3d models with preview 3d models</p>
-                    <a href="">Unicorn 3d stock</a>
+                    <p>Crossy Road replica. The game you are playing :) </p>
+                    <a className={style.projectBtn} href="https://iskan-dar.github.io/crossy-road-threejs-reactjs/">
+                        Crossy Road CV
+                    </a>
                     <p>
-                        Site for online play role-play games with rooms,
-                        videochat and map builder
+                        Fun Ai app which identifies your gender, age, face emotions and talks back to you
                     </p>
+                    <a className={style.projectBtn} href="https://fun-ai.herokuapp.com/">Fun Ai</a>
+                    <p>Online store for 3D art miniatures with preview of 3D models</p>
+                    <a className={style.projectBtn} href="https://github.com/iskan-dar/galactic_miniatures">
+                        Galactic miniatures
+                    </a>
                 </div>
             </div>
         </div>
