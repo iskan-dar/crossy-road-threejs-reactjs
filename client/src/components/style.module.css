@@ -36,11 +36,14 @@
 
 .aboutButtonBox {
   position: absolute;
-  left: 90%;
+  left: 88%;
   top: 15%;
 }
 
 .aboutBtn {
+  border: 3px solid #000000;
+  color: #ffffff;
+  font-size: 20px;
   background-color: #07a9e9;
   border-radius: 12px;
   border: none;

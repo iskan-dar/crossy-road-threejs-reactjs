@@ -1,13 +1,102 @@
 .mainBox {
     position: absolute;
+    display: flex;
+    flex-direction: column;
     top: 50%;
     left: 50%;
     transform:translate(-50%, -50%);
-    background-color: rgb(16, 150, 184);
     border-radius: 16px;
+    background: url('./Bg1.png');
 }
 
 .textBox {
-    padding: 30px;
+    padding: 30px 30px 0px 30px;
     color: #ffffff;
 }
+
+.textBox p {
+    font-size: 20px;
+}
+
+.contactsBox {
+    display: flex;
+}
+
+.stackBox {
+    display: flex ;
+    padding: 0px 30px;
+}
+
+.iconBackground {
+    width: 100px;
+    height: 100px;
+    background-color: #ffffff;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px;
+}
+
+.projectBox {
+    color: #ffffff;
+    padding: 0px 30px 50px 30px;
+}
+
+.projectBtn {
+    align-items: center;
+    appearance: none;
+    background-color: #FCFCFD;
+    border-radius: 4px;
+    border-width: 0;
+    box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset;
+    box-sizing: border-box;
+    color: #36395A;
+    cursor: pointer;
+    display: inline-flex;
+    height: 48px;
+    justify-content: center;
+    line-height: 1;
+    list-style: none;
+    overflow: hidden;
+    padding-left: 16px;
+    padding-right: 16px;
+    position: relative;
+    text-align: left;
+    text-decoration: none;
+    transition: box-shadow .15s,transform .15s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+    will-change: box-shadow,transform;
+    font-size: 18px;
+  }
+
+  .projectBtn:focus {
+    box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+  }
+
+  .projectBtn:hover {
+    box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+    transform: translateY(-2px);
+  }
+
+  .projectBtn:active {
+    box-shadow: #D6D6E7 0 3px 7px inset;
+    transform: translateY(2px);
+  }
+
+.closeBtn {
+    position: absolute;
+    left: 92%;
+    top: 10px;
+}
+
+.closeBtn:hover {
+    position: absolute;
+    left: 92%;
+    top: 11px;
+}
+
+

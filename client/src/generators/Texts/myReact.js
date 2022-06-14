@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { FontLoader } from '../../../node_modules/three/examples/jsm/loaders/FontLoader';
-import { TextGeometry } from '../../../node_modules/three/examples/jsm/geometries/TextGeometry'; 
+import { TextGeometry } from '../../../node_modules/three/examples/jsm/geometries/TextGeometry';
 
 export default function myReact(inputText) {
     const reactText = new THREE.Group()
@@ -9,7 +9,7 @@ export default function myReact(inputText) {
 
     const loader = new FontLoader();
 
-    loader.load( '/font.json', function ( font ) {
+    loader.load( './font2.json', function ( font ) {
 
 	const geometry = new TextGeometry( inputText , {
 		font: font,
