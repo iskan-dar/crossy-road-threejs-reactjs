@@ -1,3 +1,7 @@
-# frogger-react
+# Crossy Road replica built on three.js and react.js
 
-https://trello.com/invite/b/PNm7eaGG/605636ee6d5ce04747e16c71d1a8ae09/frogger
+https://iskan-dar.github.io/crossy-road-threejs-reactjs/
+
+Play, have fun and don't forget to click on the 'About me' button :)
+
+
