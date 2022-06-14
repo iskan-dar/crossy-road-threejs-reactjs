@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/crossy-road-threejs-reactjs/static/css/main.a8a7def9.css",
-    "main.js": "/crossy-road-threejs-reactjs/static/js/main.00b16ece.js",
+    "main.css": "/crossy-road-threejs-reactjs/static/css/main.c525d76c.css",
+    "main.js": "/crossy-road-threejs-reactjs/static/js/main.dd83f38c.js",
     "static/js/787.e058ae7c.chunk.js": "/crossy-road-threejs-reactjs/static/js/787.e058ae7c.chunk.js",
     "static/media/Bg1.png": "/crossy-road-threejs-reactjs/static/media/Bg1.d123f6e2264bd34b9abd.png",
     "index.html": "/crossy-road-threejs-reactjs/index.html",
-    "main.a8a7def9.css.map": "/crossy-road-threejs-reactjs/static/css/main.a8a7def9.css.map",
-    "main.00b16ece.js.map": "/crossy-road-threejs-reactjs/static/js/main.00b16ece.js.map",
+    "main.c525d76c.css.map": "/crossy-road-threejs-reactjs/static/css/main.c525d76c.css.map",
+    "main.dd83f38c.js.map": "/crossy-road-threejs-reactjs/static/js/main.dd83f38c.js.map",
     "787.e058ae7c.chunk.js.map": "/crossy-road-threejs-reactjs/static/js/787.e058ae7c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a8a7def9.css",
-    "static/js/main.00b16ece.js"
+    "static/css/main.c525d76c.css",
+    "static/js/main.dd83f38c.js"
   ]
 }
